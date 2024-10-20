@@ -60,7 +60,7 @@ In your Command Prompt (Windows) or Terminal (Linux/macOS) type:
 
 By doing a pip install, you have the Enola-AI Python library and its dependencies automatically installed in your device.
 
-**Note: Advanced users may prefer to use a virtual environment to manage dependencies and 
+**Note: Advanced users may prefer to use a Virtual Environment to manage dependencies and 
 isolate the Enola-AI library from other Python packages.**
 
 ---
@@ -203,12 +203,11 @@ LLM Steps are used to track interactions with language models where token usage,
 - Tracking token counts and associated costs.
 
 ---
-
 ## Documentation
-For complete project documentation, please visit our docs section [User Guide](docs/user_guide.md).
-There you will find complete documentation about Enola, with step-by-step instructions and examples, alongside explanations about the functionalities that this system has to offer:
 
-This basic guide will cover:
+In this section you will find complete documentation about Enola, with step-by-step instructions and examples, alongside explanations about the functionalities that this system has to offer:
+
+Currently, this guide will cover:
 - Sending Online Chat Data
 
 Please keep in mind these are Upcoming Features and will become available soon:
@@ -219,8 +218,6 @@ Please keep in mind these are Upcoming Features and will become available soon:
 - Sending Cost Information
 - Sending Batch Score Data
 
-
----
 
 ### Sending Online Chat Data
 
@@ -409,8 +406,34 @@ However, when your Python script effectively connects with an LLM Model (eg. Oll
 You can check our user guide to create a simple chatbot using Ollama running on your local machine (Available Soon).
 
 ---
+*Upcoming Features:*
+The following guides are going to be added to the documentation soon.
 
-## Summary
+### Sending Online Score Data
+
+---
+
+### Sending Multiple Tasks
+
+---
+
+### Sending File Information
+
+---
+
+### Sending API Information
+
+---
+
+### Sending Cost Information
+
+---
+
+### Sending Batch Score Information
+
+---
+
+### Summary
 
 This documentation provides a guide on using the Enola-AI Python library to initialize tracking and send online chat data. Future sections will cover additional features as they become available.
 
