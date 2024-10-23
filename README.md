@@ -2,26 +2,26 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Features](#features)
-3. [Requirements](#requirements)
-4. [Installation](#installation)
-5. [Getting Started](#getting-started)
-   - [Initializing Tracking](#initializing-tracking)
-     - [Example: Basic Tracking Initialization](#example-basic-tracking-initialization)
-   - [Understanding Steps in Enola-AI](#understanding-steps-in-enola-ai)
+1. [Introduction](#1-introduction)
+2. [Features](#2-features)
+3. [Requirements](#3-requirements)
+4. [Installation](#4-installation)
+5. [Getting Started](#5-getting-started)
+   - 5.1. [Initializing Tracking](#51-initializing-tracking)
+   - 5.2. [Example: Basic Tracking Initialization](#52-example-basic-tracking-initialization)
+   - 5.3. [Understanding Steps in Enola-AI](#53-understanding-steps-in-enola-ai)
      - [Generic Steps](#generic-steps)
      - [LLM Steps](#llm-steps)
-6. [Documentation](#documentation)
-   - [Sending Online Chat Data](#sending-online-chat-data)
-7. [Summary](#summary)
-8. [Contributing](#contributing)
-9. [License](#license)
-10. [Contact](#contact)
+6. [Documentation](#6-documentation)
+   - 6.1. [Sending Online Chat Data](#61-sending-online-chat-data)
+7. [Summary](#7-summary)
+8. [Contributing](#8-contributing)
+9. [License](#9-license)
+10. [Contact](#10-contact)
 
 ---
 
-## Introduction
+## 1. Introduction
 
 Enola AI is an advanced GenAI platform designed to validate and monitor the robustness of artificial intelligence models in highly regulated industries such as finance, healthcare, and education. Our solution ensures that AI implementations comply with strict regulatory standards through continuous assessments, seamless integrations, and real-time monitoring.
 
@@ -29,7 +29,7 @@ This documentation provides a comprehensive guide on how to use the Enola-AI Pyt
 
 ---
 
-## Features
+## 2. Features
 
 - **Multilevel Evaluation**: Collect feedback from users, automated assessments, and reviews from internal experts.
 - **Real-Time Monitoring**: Continuous monitoring capabilities to detect deviations in AI model behavior.
@@ -39,14 +39,14 @@ This documentation provides a comprehensive guide on how to use the Enola-AI Pyt
 
 ---
 
-## Requirements
+## 3. Requirements
 
 - **Python 3.7+**
 - **Enola API Token**
 
 ---
 
-## Installation
+## 4. Installation
 
 Before installing the Enola-AI Python library, ensure that you have Python 3.7 or higher installed.
 
@@ -65,7 +65,7 @@ isolate the Enola-AI library from other Python packages.**
 
 ---
 
-## Getting Started
+## 5. Getting Started
 
 To start using the Enola-AI Python library, follow the steps below to initialize tracking in your application.
 
@@ -203,30 +203,40 @@ LLM Steps are used to track interactions with language models where token usage,
 - Tracking token counts and associated costs.
 
 ---
-## Documentation
+## 6. Documentation
 
-For complete project documentation, please visit our docs section [User Guide](docs/user_guide.md).
-In this section, you will find complete documentation about Enola-AI, including step-by-step instructions and examples, along with explanations of the system's functionalities:
+In this section, you will find basic documentation about Enola-AI, including step-by-step instructions and examples, along with explanations of the system's functionalities:
 
-This section will cover:
-- Sending Online Chat Data
+This basic guide is covering the following section:
+- 6.1. Sending Online Chat Data
 
-Please keep in mind these are upcoming features that will become available soon in the [User Guide](docs/user_guide.md):
-- Sending Online Score Data
-- Sending Multiple Tasks
-- Sending File Information
-- Sending API Information
-- Sending Cost Information
-- Sending Batch Score Data
+For the rest of the documentation, you can visit our [User Guide](docs/user_guide.md) covering all of the sections:
+- 6.2. Sending Online Score Data (available soon)
+- 6.3. Sending Multiple Tasks
+- 6.4. Sending File Information
+- 6.5. Sending API Information
+- 6.6. Sending Cost Information
+- 6.7. Sending Batch Score Data (available soon)
+- Guide: Creating a Chatbot using Ollama (available soon)
+
 
 ---
-### Sending Online Chat Data
+### 6.1. Sending Online Chat Data
 
 When working with conversational AI agents, it's essential to track user interactions and model responses. Enola-AI allows you to send online chat data for monitoring and evaluation.
 
-### Step-by-Step Guide
+#### **Understanding Online Chat Data Tracking**
 
-1. **Import libraries**
+- **Purpose**: Tracking online chat data helps in monitoring user interactions, evaluating model performance, and ensuring compliance with regulatory standards.
+  
+- **Benefits**:
+  - **Performance Monitoring**: Analyze how the model responds to user inputs.
+  - **User Experience**: Improve the conversational flow by understanding user queries and model answers.
+  - **Compliance**: Keep records of interactions for auditing and compliance purposes.
+
+#### **Step-by-Step Guide**
+
+1. **Import Necessary Libraries**
 
    ```python
    # Import necessary libraries
@@ -235,7 +245,7 @@ When working with conversational AI agents, it's essential to track user interac
    import os
    ```
 
-2. **Load the Token**
+2. **Load the Enola API Token**
 
    ```python
    # Load .env file and set up your token
@@ -243,35 +253,34 @@ When working with conversational AI agents, it's essential to track user interac
    token = os.getenv('ENOLA_TOKEN')
    ```
 
-3. **Define message input from the user**
-   
+3. **Define User Input**
+
    ```python
-   # Define variable user_input as the message input from the user
-   user_input="What car offers good performance for a low cost?"
+   # Define the user's message input
+   user_input = "What car offers good performance for a low cost?"
    ```
-   
+
 4. **Initialize the Tracking Object**
 
-   Create an instance of the `Tracking` class to start tracking an execution.
+   Create an instance of the `Tracking` class to start tracking the execution.
 
    ```python
-   # Initialize the tracking object
    monitor = Tracking(
        token=token,
        name="Chat Session Tracking V1",
-       is_test=True,
+       is_test=True,  # Set to False in production
        app_id="ChatApp",
        user_id="User123",
        session_id="Session456",
        channel_id="console",
        ip="192.168.1.1",
-       message_input=user_input # "What car offers good performance for a low cost?"
+       message_input=user_input
    )
    ```
 
 5. **Create a New LLM Step**
 
-   Since we're interacting with a language model, we'll create an LLM Step.
+   Since we're interacting with a language model, create an LLM step.
 
    ```python
    # Create an LLM Step
@@ -280,7 +289,7 @@ When working with conversational AI agents, it's essential to track user interac
 
 6. **Add Extra Information**
 
-   You can add any additional information relevant to the step. In this case the user question.
+   Add any additional information relevant to the step, such as the user's question.
 
    ```python
    # Add user's question
@@ -289,12 +298,14 @@ When working with conversational AI agents, it's essential to track user interac
 
 7. **Process the User Input with the Language Model**
 
-   Suppose your model generates a response to the user's question.
+   Simulate the model generating a response to the user's question.
 
    ```python
    # Simulated model response
    model_response = "The Honda Civic offers great performance at a reasonable price."
    ```
+
+   > **Note**: Replace the simulated response with actual model integration in a production environment.
 
 8. **Add the Model's Response to the Step**
 
@@ -321,21 +332,22 @@ When working with conversational AI agents, it's essential to track user interac
    )
    ```
 
+   > **Note**: Replace token counts and costs with actual values from your language model provider.
+
 10. **Execute the Tracking**
 
     Send the tracking data to the Enola-AI server.
 
-      ```python
-      # Execute the tracking and send the data to Enola-AI server
-      monitor.execute(
-          successfull=True,
-          message_output=model_response,
-          num_iteratons=1
-      )
-      ```
-*After executing the tracking, you have successfully completed all the necessary steps to send online chat data. You can analyze the data in the Enola-AI platform*
-	
-### Complete Example: Sending Online Chat Data
+    ```python
+    # Execute the tracking and send the data to Enola-AI server
+    monitor.execute(
+        successfull=True,
+        message_output=model_response,
+        num_iteratons=1
+    )
+    ```
+
+#### **Complete Example: Sending Online Chat Data**
 
 ```python
 # Import necessary libraries
@@ -347,7 +359,7 @@ import os
 load_dotenv()
 token = os.getenv('ENOLA_TOKEN')
 
-# Define the variable user_input and assign the user message input
+# Define the user's message input
 user_input = "What car offers good performance for a low cost?"
 
 # Initialize the tracking object
@@ -394,32 +406,56 @@ monitor.execute(
     num_iteratons=1
 )
 ```
-After executing the script and the tracking, you should see a console output indicating that you have successfully sent the data to the Enola-AI servers, allowing you to monitor and evaluate your data on the Enola-AI platform:
 
-```console
-Chat Session Tracking V1: sending to server... 
-Chat Session Tracking V1: finish OK! 
-```
+#### **Explanation**
 
-**Note: The message in the variable `model_response` is being simulated in this example.**
+- **Initialization**:
+  - Imported necessary libraries and loaded the Enola API token.
+  - Initialized the `Tracking` object with user and session information.
 
-```Python
+- **Creating the LLM Step**:
+  - Created a new LLM step to track the language model interaction.
+  - Added the user's question and the model's response as extra information.
+
+- **Closing the Step**:
+  - Closed the LLM step, including token usage and cost information.
+  - Executed the tracking to send data to Enola-AI.
+
+#### **Notes**
+
+- **Model Integration**:
+  - Ensure that you capture actual token counts and costs.
+  - Ensure that you add your actual model response, since the message in the variable `model_response` is being simulated in this example:
+    ```Python
     # Simulated model response
     model_response = "The Honda Civic offers great performance at a reasonable price."
-```
+    ```
+   - However, when your Python script effectively connects with an LLM Model (eg. Ollama running on your local machine or through an API), you can expect a real response that will be stored in the variable `model_response`.
+   - You can check our user guide to create a simple chatbot using Ollama running on your local machine (available soon).
+  
 
-However, when your Python script effectively connects with an LLM Model (eg. Ollama running on your local machine or through an API), you can expect a real response that will be stored in the variable `model_response`.
-You can check our user guide to create a simple chatbot using Ollama running on your local machine (available soon).
+- **Error Handling**:
+  - Implement error handling for cases where the language model fails or returns an unexpected response.
+  - Use `step_chat.add_error()` to log any errors.
+  
+- **Executing the Tracking**:
+  - After executing the script and the tracking, you should see a console output indicating that you have successfully sent the data to the Enola-AI servers, allowing you to monitor and evaluate your data on the Enola-AI platform:
+
+	```console
+	Chat Session Tracking V1: sending to server... 
+	Chat Session Tracking V1: finish OK! 
+	```
 
 ---
 
-### Summary
+## 7. Summary
 
-This documentation provides a guide on using the Enola-AI Python library to initialize tracking and send online chat data. Future sections will cover additional features as they become available.
+This documentation provides a basic guide on using the Enola-AI Python library to initialize tracking and send online chat data.
+For more detailed documentation, you can visit our [User Guide](docs/user_guide.md).
 
 ---
 
-## Contributing
+## 8. Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or corrections.
 
@@ -432,12 +468,12 @@ When contributing, please ensure to:
 
 ---
 
-## License
+## 9. License
 
 This project is licensed under the **BSD 3-Clause License**.
 
 ---
 
-## Contact
+## 10. Contact
 
 For any inquiries or support, please contact us at [help@huemulsolutions.com](mailto:help@huemulsolutions.com).
