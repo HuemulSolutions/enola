@@ -8,8 +8,7 @@
 4. [Installation](#4-installation)
 5. [Getting Started](#5-getting-started)
    - 5.1. [Initializing Tracking](#51-initializing-tracking)
-   - 5.2. [Example: Basic Tracking Initialization](#52-example-basic-tracking-initialization)
-   - 5.3. [Understanding Steps in Enola-AI](#53-understanding-steps-in-enola-ai)
+   - 5.2. [Understanding Steps in Enola-AI](#52-understanding-steps-in-enola-ai)
      - [Generic Steps](#generic-steps)
      - [LLM Steps](#llm-steps)
 6. [Documentation](#6-documentation)
@@ -75,7 +74,7 @@ isolate the Enola-AI library from other Python packages.**
 
 To start using the Enola-AI Python library, follow the steps below to initialize tracking in your application.
 
-### Initializing Tracking
+### 5.1. Initializing Tracking
 To connect to Enola and initialize tracking you will need:
 - A token provided by Enola-AI. This token is essential for authentication and authorization purposes
 - A Python script. You can start by creating an empty Python file with a .py extension (eg. enola_sample.py, enola_script.py)
@@ -175,7 +174,7 @@ After executing the script and initializing the tracking agent, you should get a
 ```
 **This means you have successfully connected to Enola and initialized your first tracking agent!**
 
-### Understanding Steps in Enola-AI
+### 5.2. Understanding Steps in Enola-AI
 
 In Enola-AI, the concept of **steps** is fundamental for tracking the execution flow of your AI agents. Each step represents a significant action or event in your agent's processing pipeline.
 
@@ -213,15 +212,16 @@ LLM Steps are used to track interactions with language models where token usage,
 
 In this section, you will find complete documentation about Enola-AI, including step-by-step instructions and examples, along with explanations of the system's functionalities:
 
-Currently, this guide is covering the following sections:
+This guide is covering the following sections:
 - 6.1. Sending Online Chat Data
-- 6.2. Sending Online Score Data (available soon)
+- 6.2. Sending Online Score Data
 - 6.3. Sending Multiple Tasks
 - 6.4. Sending File Information
 - 6.5. Sending API Information
 - 6.6. Sending Cost Information
-- 6.7. Sending Batch Score Data (available soon)
-- Guide: Creating a Chatbot using Ollama (available soon)
+- 6.7. Sending Batch Score Data
+
+For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](building_chatbot_ollama.md).
 
 ---
 ### 6.1. Sending Online Chat Data
@@ -287,7 +287,7 @@ When working with conversational AI agents, it's essential to track user interac
 
    ```python
    # Create an LLM Step
-   step_chat = monitor.new_llm_step("User Inquiry")
+   step_chat = monitor.new_step("User Inquiry")
    ```
 
 6. **Add Extra Information**
@@ -379,7 +379,7 @@ monitor = Tracking(
 )
 
 # Create an LLM Step
-step_chat = monitor.new_llm_step("User Inquiry")
+step_chat = monitor.new_step("User Inquiry")
 
 # Add user's question
 step_chat.add_extra_info("UserQuestion", user_input)
@@ -434,7 +434,7 @@ monitor.execute(
     model_response = "The Honda Civic offers great performance at a reasonable price."
     ```
    - However, when your Python script effectively connects with an LLM Model (eg. Ollama running on your local machine or through an API), you can expect a real response that will be stored in the variable `model_response`.
-   - You can check our user guide to create a simple chatbot using Ollama running on your local machine (available soon).
+   - You can check our user guide to Build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](building_chatbot_ollama.md).
   
 
 - **Error Handling**:
@@ -450,7 +450,291 @@ monitor.execute(
 	```
 
 ---
-### 6.2. Sending Online Score Data (available soon)
+### 6.2. Sending Online Score Data
+
+When working with predictive models that provide real-time scoring or predictions (e.g., credit risk scoring, fraud detection), it's important to track and log these scores for monitoring, auditing, and compliance purposes. Enola-AI allows you to send online score data to record these predictions along with relevant metadata.
+
+#### **Understanding Online Score Data Tracking**
+
+- **Purpose**: Tracking online score data helps in monitoring model performance, detecting biases, and ensuring compliance with regulations.
+- **Benefits**:
+  - **Performance Monitoring**: Analyze model predictions over time.
+  - **Bias Detection**: Identify and address potential biases in model predictions.
+  - **Regulatory Compliance**: Maintain records of predictions for auditing purposes.
+
+#### **Step-by-Step Guide**
+
+1. **Import Necessary Libraries**
+
+   ```python
+   # Import necessary libraries
+   from enola.tracking import Tracking
+   from enola.enola_types import ErrOrWarnKind
+   from dotenv import load_dotenv
+   import os
+   import uuid
+   ```
+
+2. **Load the Enola API Token**
+
+   ```python
+   # Load .env file and set up your token
+   load_dotenv()
+   token = os.getenv('ENOLA_TOKEN')
+   ```
+
+3. **Initialize the Tracking Object**
+
+   Generate a unique `session_id` for the scoring session.
+
+   ```python
+   # Generate a session_id
+   session_id = str(uuid.uuid4())
+
+   # Initialize the tracking object
+   monitor = Tracking(
+       token=token,
+       name="Online Scoring Session",
+       is_test=True,
+       app_id="OnlineScoringApp",
+       user_id="User123",
+       session_id=session_id,
+       channel_id="API",    # Channel through which the scoring is requested
+       ip="192.168.1.1",
+       message_input="Score request"
+   )
+   ```
+
+4. **Create a New Scoring Step**
+
+   ```python
+   # Create a new step for scoring
+   step_score = monitor.new_step("Online Scoring")
+   ```
+
+5. **Collect Input Features**
+
+   Simulate collecting input features for the model. In a real scenario, these would come from the user's input or a data source.
+
+   ```python
+   # Simulated input features
+   input_features = {
+       "age": 35,
+       "income": 55000,
+       "credit_history": "Good",
+       "loan_amount": 15000
+   }
+
+   # Add input features to the step
+   step_score.add_extra_info("InputFeatures", input_features)
+   ```
+
+6. **Invoke the Predictive Model**
+
+   Simulate invoking a predictive model to get a score.
+
+   ```python
+   # Simulated model score
+   model_score = 0.85  # Probability of default, for example
+
+   # Add model score to the step
+   step_score.add_extra_info("ModelScore", model_score)
+   ```
+
+7. **Validate the Model Score**
+
+   Perform any necessary validation on the score.
+
+   ```python
+   # Step: Validate Model Score
+   step_validate_score = monitor.new_step("Validate Model Score")
+   if not (0 <= model_score <= 1):
+       step_validate_score.add_error(
+           id="InvalidScore",
+           message="Model score is out of valid range (0 to 1).",
+           kind=ErrOrWarnKind.INTERNAL
+       )
+       monitor.close_step_others(
+           step=step_validate_score,
+           successfull=False,
+           message_output="Invalid model score."
+       )
+       # Execute tracking with successfull=False
+       monitor.execute(
+           successfull=False,
+           message_output="Invalid model score.",
+           num_iteratons=2
+       )
+       print("Model score is invalid.")
+       exit()  # Exit or handle accordingly
+   else:
+       monitor.close_step_others(
+           step=step_validate_score,
+           successfull=True,
+           message_output="Model score is valid."
+       )
+   ```
+
+8. **Close the Scoring Step**
+
+   Include any relevant metrics such as processing time or costs.
+
+   ```python
+   # Close the scoring step
+   monitor.close_step_others(
+       step=step_score,
+       successfull=True,
+       message_output="Online scoring completed.",
+       others_cost=0.0005  # Example cost per scoring
+   )
+   ```
+
+9. **Execute the Tracking**
+
+   ```python
+   # Execute the tracking
+   monitor.execute(
+       successfull=True,
+       message_output="Online scoring session completed.",
+       num_iteratons=2  # Number of steps
+   )
+   ```
+
+#### **Complete Example: Sending Online Score Data**
+
+```python
+from enola.tracking import Tracking
+from enola.enola_types import ErrOrWarnKind
+from dotenv import load_dotenv
+import os
+import uuid
+
+# Load .env file and set up your token
+load_dotenv()
+token = os.getenv('ENOLA_TOKEN')
+
+# Generate a session_id
+session_id = str(uuid.uuid4())
+
+# Initialize the tracking object
+monitor = Tracking(
+    token=token,
+    name="Online Scoring Session",
+    is_test=True,
+    app_id="OnlineScoringApp",
+    user_id="User123",
+    session_id=session_id,
+    channel_id="API",
+    ip="192.168.1.1",
+    message_input="Score request"
+)
+
+# Create a new step for scoring
+step_score = monitor.new_step("Online Scoring")
+
+# Simulated input features
+input_features = {
+    "age": 35,
+    "income": 55000,
+    "credit_history": "Good",
+    "loan_amount": 15000
+}
+
+# Add input features to the step
+step_score.add_extra_info("InputFeatures", input_features)
+
+# Simulated model score
+model_score = 0.85  # Probability of default
+
+# Add model score to the step
+step_score.add_extra_info("ModelScore", model_score)
+
+# Step: Validate Model Score
+step_validate_score = monitor.new_step("Validate Model Score")
+if not (0 <= model_score <= 1):
+    step_validate_score.add_error(
+        id="InvalidScore",
+        message="Model score is out of valid range (0 to 1).",
+        kind=ErrOrWarnKind.INTERNAL
+    )
+    monitor.close_step_others(
+        step=step_validate_score,
+        successfull=False,
+        message_output="Invalid model score."
+    )
+    # Execute tracking with successfull=False
+    monitor.execute(
+        successfull=False,
+        message_output="Invalid model score.",
+        num_iteratons=2
+    )
+    print("Model score is invalid.")
+    exit()  # Exit or handle accordingly
+else:
+    monitor.close_step_others(
+        step=step_validate_score,
+        successfull=True,
+        message_output="Model score is valid."
+    )
+
+# Close the scoring step
+monitor.close_step_others(
+    step=step_score,
+    successfull=True,
+    message_output="Online scoring completed.",
+    others_cost=0.0005  # Example cost per scoring
+)
+
+# Execute the tracking
+monitor.execute(
+    successfull=True,
+    message_output="Online scoring session completed.",
+    num_iteratons=2
+)
+
+# Continue with your application logic
+print(f"Model Score: {model_score}")
+```
+
+#### **Explanation**
+
+- **Initialization**:
+  - Loaded the Enola API token and initialized the tracking object.
+  - Generated a unique `session_id`.
+
+- **Scoring Step**:
+  - Created a new step for online scoring.
+  - Simulated input features and added them to the step.
+  - Simulated a model score and added it to the step.
+
+- **Validation Step**:
+  - Created a new step to validate the model score.
+  - Checked if the score is within a valid range (0 to 1).
+  - If invalid, logged an error and executed tracking with `successfull=False`.
+
+- **Closing Steps**:
+  - Closed the scoring step, including cost information.
+  - Executed the tracking to send data to Enola-AI.
+
+#### **Notes**
+
+- **Real Model Integration**:
+  - Replace the simulated model score with the actual output from your predictive model.
+  - Ensure that you handle any exceptions or errors during model invocation.
+
+- **Input Features**:
+  - Include all relevant input features used by your model.
+  - Be mindful of sensitive data and ensure compliance with data protection regulations.
+
+- **Error Handling**:
+  - Implement comprehensive error handling to capture and log any issues during scoring.
+
+#### **Benefits**
+
+- **Compliance**: Maintain detailed records of each scoring event for regulatory compliance.
+- **Monitoring**: Track model performance and detect anomalies in predictions.
+- **Auditing**: Facilitate auditing processes by providing a transparent record of model decisions.
+
 ---
 
 ### 6.3. Sending Multiple Tasks
@@ -469,8 +753,7 @@ In this example, we'll demonstrate how to:
 #### 1. **Initialize the Tracking Object**
 
 First, import the necessary modules and initialize the `Tracking` object. Use a unique `session_id` to identify the session.
-In this example, a chatbot made with Ollama will be used for model responses. You can use your own model or
-You can visit our Guide: Creating a Chatbot using Ollama (available soon).
+In this example, a chatbot made with Ollama will be used for model responses. You can use your own model or visit our section [Build a Chatbot using Ollama](building_chatbot_ollama.md).
 
 ```python
 from enola.tracking import Tracking
@@ -830,7 +1113,6 @@ First, import the necessary modules and initialize the `Tracking` object. Genera
 
 ```python
 from enola.tracking import Tracking
-from enola_ollama_v2 import ollama_chat  # Import your model/chatbot if applicable
 from dotenv import load_dotenv
 import os
 import uuid
@@ -943,7 +1225,6 @@ Below is the complete code that demonstrates how to send file information using 
 
 ```python
 from enola.tracking import Tracking
-from enola_ollama_v2 import ollama_chat  # Import your model/chatbot if applicable
 from dotenv import load_dotenv
 import os
 import uuid
@@ -1574,23 +1855,268 @@ By incorporating cost information into your tracking steps, you gain valuable in
 
 ---
 
-### 6.7. Sending Batch Score Information (available soon)
+### 6.7. Sending Batch Score Information
+
+In scenarios where your application processes large datasets to generate scores or predictions in bulk (e.g., monthly risk assessments, mass customer scoring), it's essential to track these batch operations. Enola-AI provides capabilities to send batch score information, enabling monitoring, auditing, and optimization of batch processing tasks.
+
+#### **Understanding Batch Score Information Tracking**
+
+- **Purpose**: Tracking batch score information helps in monitoring the performance and reliability of batch processing tasks.
+- **Benefits**:
+  - **Operational Monitoring**: Keep track of batch processing times and success rates.
+  - **Error Handling**: Identify and address issues within batch operations.
+  - **Resource Optimization**: Analyze resource utilization for batch jobs to optimize costs.
+
+#### **Step-by-Step Guide**
+
+1. **Import Necessary Libraries**
+
+   ```python
+   # Import necessary libraries
+   from enola.tracking import Tracking
+   from enola.enola_types import ErrOrWarnKind
+   from dotenv import load_dotenv
+   import os
+   import uuid
+   ```
+
+2. **Load the Enola API Token**
+
+   ```python
+   # Load .env file and set up your token
+   load_dotenv()
+   token = os.getenv('ENOLA_TOKEN')
+   ```
+
+3. **Initialize the Tracking Object**
+
+   Generate a unique `session_id` for the batch processing session.
+
+   ```python
+   # Generate a session_id
+   session_id = str(uuid.uuid4())
+
+   # Initialize the tracking object
+   monitor = Tracking(
+       token=token,
+       name="Batch Scoring Session",
+       is_test=True,  # Set to False in production
+       app_id="BatchScoringApp",
+       user_id="System",           # User ID can be 'System' for automated tasks
+       session_id=session_id,
+       channel_id="BatchProcess",
+       ip="127.0.0.1",             # IP address of the server
+       message_input="Batch score processing started"
+   )
+   ```
+
+4. **Create a New Batch Processing Step**
+
+   ```python
+   # Create a new step for batch processing
+   step_batch = monitor.new_step("Batch Score Processing")
+   ```
+
+5. **Simulate Batch Processing**
+
+   Simulate processing a batch of records.
+
+   ```python
+   # Simulated batch processing
+   total_records = 1000
+   processed_records = 995
+   failed_records = 5
+   processing_time = 120  # In seconds
+   ```
+
+6. **Add Batch Processing Information**
+
+   ```python
+   # Add batch processing information to the step
+   batch_info = {
+       "TotalRecords": total_records,
+       "ProcessedRecords": processed_records,
+       "FailedRecords": failed_records,
+       "ProcessingTimeSeconds": processing_time
+   }
+   step_batch.add_extra_info("BatchProcessingInfo", batch_info)
+   ```
+
+7. **Handle Failed Records**
+
+   If there are any failed records, log them.
+
+   ```python
+   # Simulated failed record IDs
+   failed_record_ids = [101, 202, 303, 404, 505]
+
+   if failed_records > 0:
+       step_batch.add_error(
+           id="BatchProcessingErrors",
+           message=f"{failed_records} records failed to process.",
+           kind=ErrOrWarnKind.EXTERNAL
+       )
+       
+   # Add the failed record IDs as extra info
+   step_batch.add_extra_info("FailedRecordIDs", failed_record_ids)
+   ```
+
+8. **Close the Batch Processing Step**
+
+   Include metrics such as total records, processing time, and costs.
+
+   ```python
+    # Close the batch processing step
+    monitor.close_step_others(
+        step=step_batch,
+        successfull=(failed_records == 0),
+        message_output="Batch processing completed.",
+        others_cost=0.05  # Example cost
+    )
+   ```
+
+9. **Execute the Tracking**
+
+   ```python
+   # Execute the tracking
+   monitor.execute(
+       successfull=(failed_records == 0),
+       message_output=f"Completed, {total_records} records, {failed_records} errors.",
+       num_iteratons=1
+   )
+   ```
+
+#### **Complete Example: Sending Batch Score Information**
+
+```python
+from enola.tracking import Tracking
+from enola.enola_types import ErrOrWarnKind
+from dotenv import load_dotenv
+import os
+import uuid
+
+# Load .env file and set up your token
+load_dotenv()
+token = os.getenv('ENOLA_TOKEN')
+
+# Generate a session_id
+session_id = str(uuid.uuid4())
+
+# Initialize the tracking object
+monitor = Tracking(
+    token=token,
+    name="Batch Scoring Session",
+    is_test=True,
+    app_id="BatchScoringApp",
+    user_id="System",
+    session_id=session_id,
+    channel_id="BatchProcess",
+    ip="127.0.0.1",
+    message_input="Batch score processing started"
+)
+
+# Create a new step for batch processing
+step_batch = monitor.new_step("Batch Score Processing")
+
+# Simulated batch processing
+total_records = 1000
+processed_records = 995
+failed_records = 5
+processing_time = 120  # In seconds
+
+# Add batch processing information to the step
+batch_info = {
+    "TotalRecords": total_records,
+    "ProcessedRecords": processed_records,
+    "FailedRecords": failed_records,
+    "ProcessingTimeSeconds": processing_time
+}
+step_batch.add_extra_info("BatchProcessingInfo", batch_info)
+
+# Simulated failed record IDs
+failed_record_ids = [101, 202, 303, 404, 505]
+
+if failed_records > 0:
+    # Add the error without the extra_data parameter
+    step_batch.add_error(
+        id="BatchProcessingErrors",
+        message=f"{failed_records} records failed to process.",
+        kind=ErrOrWarnKind.EXTERNAL
+    )
+    # Add the failed record IDs as extra info
+    step_batch.add_extra_info("FailedRecordIDs", failed_record_ids)
+
+# Close the batch processing step
+monitor.close_step_others(
+    step=step_batch,
+    successfull=(failed_records == 0),
+    message_output="Batch processing completed.",
+    others_cost=0.05  # Example cost
+)
+
+# Execute the tracking
+monitor.execute(
+    successfull=(failed_records == 0),
+    message_output=f"Completed, {total_records} records, {failed_records} errors.",
+    num_iteratons=1
+)
+
+# Continue with your application logic
+if failed_records > 0:
+    print(f"Batch Completed, {total_records} records, {failed_records} errors.")
+else:
+    print("Batch processing completed successfully.")
+
+```
+
+#### **Explanation**
+
+- **Initialization**:
+  - Loaded the Enola API token and initialized the tracking object.
+  - Set `user_id` to "System" to indicate an automated process.
+
+- **Batch Processing Step**:
+  - Created a new step for batch score processing.
+  - Simulated batch processing metrics and added them to the step.
+
+- **Closing Steps**:
+  - Closed the batch processing step, indicating success based on whether there were any failures.
+  - Included cost information.
+
+- **Executing Tracking**:
+  - Executed the tracking to send data to Enola-AI.
+  - Outputted a message indicating the result of the batch processing.
+
+#### **Notes**
+
+- **Real Batch Processing Integration**:
+  - Replace simulated data with actual batch processing metrics from your application.
+  - Ensure accurate tracking of processed and failed records.
+
+- **Resource Utilization**:
+  - Consider adding additional metrics such as CPU usage or memory consumption if relevant.
+
+#### **Benefits**
+
+- **Operational Insights**: Gain visibility into batch processing operations.
+- **Error Management**: Quickly identify and address issues with failed records.
+- **Performance Optimization**: Analyze processing times to improve efficiency.
+- **Compliance**: Maintain records of batch processing activities for auditing purposes.
 
 ---
 
 ## 7. Summary
 
-This documentation provides a guide on using the Enola-AI Python library to initialize tracking and explains the following sections:
+This documentation provided a guide on using the Enola-AI Python library to initialize tracking and explained the following sections:
 - 6.1. Sending Online Chat Data
+- 6.2. Sending Online Score Data
 - 6.3. Sending Multiple Tasks
 - 6.4. Sending File Information
 - 6.5. Sending API Information
 - 6.6. Sending Cost Information
+- 6.7. Sending Batch Score Information
 
-Future sections will cover additional features as they become available:
-- 6.2 Sending Online Score Data
-- 6.7 Sending Batch Score Information
-- Guide: Creating a Chatbot using Ollama
+For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](building_chatbot_ollama.md)
 
 ---
 

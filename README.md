@@ -8,8 +8,7 @@
 4. [Installation](#4-installation)
 5. [Getting Started](#5-getting-started)
    - 5.1. [Initializing Tracking](#51-initializing-tracking)
-   - 5.2. [Example: Basic Tracking Initialization](#52-example-basic-tracking-initialization)
-   - 5.3. [Understanding Steps in Enola-AI](#53-understanding-steps-in-enola-ai)
+   - 5.2. [Understanding Steps in Enola-AI](#52-understanding-steps-in-enola-ai)
      - [Generic Steps](#generic-steps)
      - [LLM Steps](#llm-steps)
 6. [Documentation](#6-documentation)
@@ -69,7 +68,7 @@ isolate the Enola-AI library from other Python packages.**
 
 To start using the Enola-AI Python library, follow the steps below to initialize tracking in your application.
 
-### Initializing Tracking
+### 5.1. Initializing Tracking
 To connect to Enola and initialize tracking you will need:
 - A token provided by Enola-AI. This token is essential for authentication and authorization purposes
 - A Python script. You can start by creating an empty Python file with a .py extension (eg. enola_sample.py, enola_script.py)
@@ -169,7 +168,7 @@ After executing the script and initializing the tracking agent, you should get a
 ```
 **This means you have successfully connected to Enola and initialized your first tracking agent!**
 
-### Understanding Steps in Enola-AI
+### 5.2. Understanding Steps in Enola-AI
 
 In Enola-AI, the concept of **steps** is fundamental for tracking the execution flow of your AI agents. Each step represents a significant action or event in your agent's processing pipeline.
 
@@ -207,18 +206,18 @@ LLM Steps are used to track interactions with language models where token usage,
 
 In this section, you will find basic documentation about Enola-AI, including step-by-step instructions and examples, along with explanations of the system's functionalities:
 
-This basic guide is covering the following section:
+This initial guide is covering the following section:
 - 6.1. Sending Online Chat Data
 
 For the rest of the documentation, you can visit our [User Guide](docs/user_guide.md) covering all of the sections:
-- 6.2. Sending Online Score Data (available soon)
+- 6.2. Sending Online Score Data
 - 6.3. Sending Multiple Tasks
 - 6.4. Sending File Information
 - 6.5. Sending API Information
 - 6.6. Sending Cost Information
-- 6.7. Sending Batch Score Data (available soon)
-- Guide: Creating a Chatbot using Ollama (available soon)
+- 6.7. Sending Batch Score Data
 
+For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](docs/building_chatbot_ollama.md).
 
 ---
 ### 6.1. Sending Online Chat Data
@@ -284,7 +283,7 @@ When working with conversational AI agents, it's essential to track user interac
 
    ```python
    # Create an LLM Step
-   step_chat = monitor.new_llm_step("User Inquiry")
+   step_chat = monitor.new_step("User Inquiry")
    ```
 
 6. **Add Extra Information**
@@ -376,7 +375,7 @@ monitor = Tracking(
 )
 
 # Create an LLM Step
-step_chat = monitor.new_llm_step("User Inquiry")
+step_chat = monitor.new_step("User Inquiry")
 
 # Add user's question
 step_chat.add_extra_info("UserQuestion", user_input)
@@ -431,7 +430,7 @@ monitor.execute(
     model_response = "The Honda Civic offers great performance at a reasonable price."
     ```
    - However, when your Python script effectively connects with an LLM Model (eg. Ollama running on your local machine or through an API), you can expect a real response that will be stored in the variable `model_response`.
-   - You can check our user guide to create a simple chatbot using Ollama running on your local machine (available soon).
+   - For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](docs/building_chatbot_ollama.md).
   
 
 - **Error Handling**:
@@ -450,8 +449,10 @@ monitor.execute(
 
 ## 7. Summary
 
-This documentation provides a basic guide on using the Enola-AI Python library to initialize tracking and send online chat data.
-For more detailed documentation, you can visit our [User Guide](docs/user_guide.md).
+- This documentation provides a basic guide on using the Enola-AI Python library to initialize tracking and send online chat data.
+- For more detailed documentation, you can visit our [User Guide](docs/user_guide.md).
+- For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](docs/building_chatbot_ollama.md)
+
 
 ---
 
