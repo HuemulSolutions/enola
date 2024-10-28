@@ -451,7 +451,7 @@ monitor.execute(
 
 - This documentation provides a basic guide on using the Enola-AI Python library to initialize tracking and send online chat data.
 - For more detailed documentation, you can visit our [User Guide](docs/user_guide.md).
-- For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](docs/building_chatbot_ollama.md)
+- For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](docs/building_chatbot_ollama.md).
 
 
 ---

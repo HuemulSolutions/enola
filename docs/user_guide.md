@@ -1132,7 +1132,7 @@ user_input = "User File information"
 monitor = Tracking(
     token=token,
     name="Sending File Information",
-    is_test=True,  # Set to False in production
+    is_test=True,
     app_id="SendingFileInformationApp",
     user_id="User456",
     session_id=session_id,
@@ -1304,9 +1304,6 @@ monitor.execute(
 
 - **Error Handling:**
   - You may wish to add error handling around the file processing and tracking execution to catch any exceptions.
-
-- **Token Validation:**
-  - Ensure that the `ENOLA_TOKEN` environment variable is correctly set and that the token is valid.
 
 ### Benefits of Tracking File Information
 
@@ -1900,7 +1897,7 @@ In scenarios where your application processes large datasets to generate scores 
    monitor = Tracking(
        token=token,
        name="Batch Scoring Session",
-       is_test=True,  # Set to False in production
+       is_test=True,
        app_id="BatchScoringApp",
        user_id="System",           # User ID can be 'System' for automated tasks
        session_id=session_id,
@@ -2093,9 +2090,6 @@ else:
   - Replace simulated data with actual batch processing metrics from your application.
   - Ensure accurate tracking of processed and failed records.
 
-- **Resource Utilization**:
-  - Consider adding additional metrics such as CPU usage or memory consumption if relevant.
-
 #### **Benefits**
 
 - **Operational Insights**: Gain visibility into batch processing operations.
@@ -2116,7 +2110,7 @@ This documentation provided a guide on using the Enola-AI Python library to init
 - 6.6. Sending Cost Information
 - 6.7. Sending Batch Score Information
 
-For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](building_chatbot_ollama.md)
+For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](building_chatbot_ollama.md).
 
 ---
 

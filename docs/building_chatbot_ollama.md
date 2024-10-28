@@ -176,7 +176,7 @@ def chatbot():
                     )
 
                     # Simulate processing the file content
-                    response = f"File '{os.path.basename(file_path)}' uploaded and processed successfully."
+                    response = f"File '{os.path.basename(file_path)}' uploaded successfully."
 
                 except Exception as e:
                     print(f"Error reading file: {e}")
@@ -277,7 +277,7 @@ def chatbot():
             # Close the step as unsuccessful
             monitor.close_step_token(
                 step=step_chat,
-                successfull=False,  # Note 'successfull' spelling
+                successfull=False,
                 message_output="Error occurred during LLM invocation."
             )
             print("An error occurred while processing your request.")
