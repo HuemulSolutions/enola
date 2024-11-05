@@ -3,7 +3,7 @@
 ### **Introduction**
 
 If you want to build a chatbot to integrate it with Enola-AI, you can follow this guide to build your own chatbot using Ollama, running Llama locally on your machine. Keep in mind if you already have a chatbot or AI model, you can use that instead.
-This guide will help you create a simple yet powerful chatbot using Ollama, an open-source large language model (LLM), integrated with Enola-AI for advanced tracking and monitoring. The chatbot includes functionalities for:
+This guide will help you create a simple chatbot using Ollama, an open-source large language model (LLM), integrated with Enola-AI for advanced tracking and monitoring. The chatbot includes functionalities for:
 
 - Sending Online Chat Data
 - Sending Multiple Tasks
@@ -11,7 +11,15 @@ This guide will help you create a simple yet powerful chatbot using Ollama, an o
 - Sending API Information
 - Sending Cost Information
 
-By the end of this guide, you'll have a fully functional chatbot that logs detailed interaction data to the Enola-AI platform.
+The chatbot plays the role of an Agent, receiving an Input from the User and returning an Output to the User.
+
+Basic architecture with AI solution:
+![Basic Architecture](images/basic_architecture.jpg)
+
+Basic architecture with Enola-AI and Tracking feature:
+![Track Activity](images/track_activity.jpg)
+
+By the end of this guide, you'll have a fully functional chatbot that tracks and logs data to the Enola-AI platform.
 
 ---
 
