@@ -8,17 +8,27 @@
 4. [Installation](#4-installation)
 5. [Getting Started](#5-getting-started)
    - 5.1. [Initializing Tracking](#51-initializing-tracking)
-   - 5.2. [Track Activity: Basic Architecture](#52-track-activity-basic-architecture)
-   - 5.3. [Understanding Steps in Enola-AI](#53-understanding-steps-in-enola-ai)
-     - [Generic Steps](#generic-steps)
-     - [LLM Steps](#llm-steps)
-   - 5.4. [Feedback Evaluation](#54-feedback-evaluation)
-   - 5.5. [Get Tracking: Extracting Information](#55-get-tracking-extracting-information)
-6. [Documentation](#6-documentation)
-7. [Summary](#7-summary)
-8. [Contributing](#8-contributing)
-9. [License](#9-license)
-10. [Contact](#10-contact)
+   - 5.2. [Complete Example: Basic Tracking Initialization](#52-complete-example-basic-tracking-initialization)
+6. [Understanding how Enola-AI works](#6-understanding-how-enola-ai-works)
+   - 6.1. [Track Activity](#61-track-activity)
+   - 6.2. [Steps in Enola-AI](#62-steps-in-enola-ai)
+   - 6.3. [Feedback Evaluation](#63-feedback-evaluation)
+   - 6.4. [Extracting Information](#64-extracting-information)
+7. [Documentation: Sending Data to Enola-AI](#7-documentation-sending-data-to-enola-ai)
+   - 7.1. [Sending Online Chat Data](#7-documentation-sending-data-to-enola-ai)
+   - 7.2. [Sending Online Score Data](#7-documentation-sending-data-to-enola-ai)
+   - 7.3. [Sending Multiple Tasks](#7-documentation-sending-data-to-enola-ai)
+   - 7.4. [Sending File Information](#7-documentation-sending-data-to-enola-ai)
+   - 7.5. [Sending API Information](#7-documentation-sending-data-to-enola-ai)
+   - 7.6. [Sending Cost Information](#7-documentation-sending-data-to-enola-ai)
+   - 7.7. [Sending Batch Score Information](#7-documentation-sending-data-to-enola-ai)
+8. [Summary](#8-summary)
+   - 8.1. [Building an Ollama Chatbot](#81-building-an-ollama-chatbot)
+   - 8.2. [Frequently Asked Questions](#82-frequently-asked-questions)
+   - 8.3. [Complete Code Examples](#83-complete-code-examples)
+9. [Contributing](#9-contributing)
+10. [License](#10-license)
+11. [Contact](#11-contact)
 
 ---
 
@@ -134,7 +144,7 @@ token = os.getenv('ENOLA_TOKEN')
 ```python
 # Initialize the tracking agent
 monitor = Tracking(
-    token=token,			  # Your Enola API token
+    token=token,              # Your Enola API token
     name="My Enola Project",  # Name of your tracking session
     is_test=True,             # Set to True if this is a test session
     app_id="my_app_id_01",    # Application ID
@@ -210,7 +220,7 @@ monitor.execute(
 ```
 ---
 
-#### **Complete Example: Basic Tracking Initialization**
+## 5.2. Complete Example: Basic Tracking Initialization
 
 ```python
 # Import necessary libraries
@@ -278,41 +288,28 @@ My Enola Project: finish OK!
 
 ---
 
-## 5.2. Track Activity
+## 6. Understanding how Enola-AI works
 
-In a basic AI solution, you would use this architecture:
-![Basic Architecture](docs/images/basic_architecture.jpg)
+To better understand how Enola-AI works and what has to offer, it is important that you understand its different features.
+This section is going to be divided in 4 subcategories:
 
-Basic architecture with AI solution:
-- The User sends and Input.
-- The Agent returns an Output.
-
-When using Enola-AI, you can add Track Activity, allowing you to track any interactions that the system is doing.
-![Track Activity](docs/images/track_activity.jpg)
-
-Example Track Activity in Python:
-![Track Activity Code](docs/images/track_activity_code.jpg)
-Code explanation: 
-1. You initialize the Tracking.
-2. You validate the user input with Step 1.
-3. You ask a question to an LLM Agent with Step 2.
-4. You validate the model response with Step 3.
-5. You send the data to Enola-AI.
-
-Basic architecture with Enola-AI:
-- The User sends and Input.
-- The Agent returns an Output.
-- Track Activity is sent to Enola-AI.
-
-After doing the Tracking, you can check it in the Enola-AI platform:
-![Track Activity Frontend](docs/images/track_activity_frontend.jpg)
-
-By tracking the interactions in your system with Enola-AI, you can effectively monitor, validate and evaluate your models.
+- [6.1. Track Activity](docs/track_activity.md)
+- [6.2. Steps in Enola-AI](docs/steps_in_enola_ai.md)
+- [6.3. Feedback Evaluation](docs/feedback_evaluation.md)
+- [6.4. Extracting Information](docs/extracting_information.md)
 
 ---
 
-## 5.3. Understanding Steps in Enola-AI
+### 6.1. Track Activity
 
+When using Enola-AI, you can add Track Activity, allowing you to track any interactions from the system and users.
+By tracking the interactions in your system with Enola-AI, you can effectively monitor, validate and evaluate your models.
+
+[6.1. Track Activity](docs/track_activity.md)
+
+---
+
+### 6.2. Steps in Enola-AI 
 In Enola-AI, the concept of **steps** is fundamental for tracking the execution flow of your AI agents. Each step represents a significant action or event in your agent's processing pipeline.
 
 There are two main types of steps:
@@ -323,311 +320,58 @@ There are two main types of steps:
 
 Understanding the difference between these step types is crucial for accurate tracking and cost analysis.
 
-#### Generic Steps
-
-Generic steps are used to track any action or process in your agent that doesn't involve a language model. This could include data retrieval, preprocessing, API calls, or custom computations.
-
-**When to use Generic Steps:**
-
-- Data fetching from databases or APIs.
-- Data preprocessing and evaluation.
-- Custom computations or business logic.
-- Any step where token usage is not applicable.
-
-#### LLM Steps
-
-LLM Steps are used to track interactions with language models where token usage, input/output messages, and costs are important.
-
-**When to use LLM Steps:**
-
-- Sending prompts to a language model.
-- Receiving responses from a language model.
-- Tracking token counts and associated costs.
-
-#### How to create and close Steps:
-In your Python code, you can create and close steps.
-
-**How to create a Step:**
-```python
-# Create a step
-step_chat = monitor.new_step("New step creation example")
-```
-
-**How to close a Step as Generic:**
-```python
-# Close Step as Generic with monitor.close_step_others
-monitor.close_step_others(
-    step=example_generic_step,
-    successfull=True,
-    message_output=model_response
-)
-```
-
-**How to close a Step as LLM:**
-
-```python
-# Close Step as LLM with monitor.close_step_token
-monitor.close_step_token(
-    step=example_llm_step,
-    successfull=True,
-    message_output=model_response,
-    token_input_num=12,
-    token_output_num=15,
-    token_total_cost=0.0025,
-    token_input_cost=0.001,
-    token_output_cost=0.0015
-)
-```
----
-## 5.4. Feedback Evaluation 
-
-Enola-AI provides a feedback system that allows users to evaluate AI agent executions. Feedback can be submitted either through the Enola platform or programmatically via code. This helps in assessing the performance of your AI agents and gathering user insights for improvement.
-
-![Feedback Evaluation](docs/images/feedback_evaluation.jpg)
-
-By incorporating this feedback mechanism, you can effectively monitor and improve your AI agents based on user evaluations.
-
-
-### Submitting Feedback via Code
-
-You can submit feedback using the Enola-AI SDK in Python. Here's a simple example:
-
-### Step 1: Import Necessary Modules
-
-```python
-from enola import evaluation
-from enola.enola_types import EvalType
-from dotenv import load_dotenv
-import os
-```
-
-### Step 2: Set Your Enola Token
-
-```python
-load_dotenv()
-token = os.getenv("ENOLA_TOKEN")
-```
-
-### Step 3: Create an Evaluation Instance
-
-Specify the evaluation type (`USER`, `AUTO`, or `INTERNAL`) and user information.
-
-```python
-eval = evaluation.Evaluation(
-    token=token,
-    eval_type=EvalType.USER,
-    user_id="user_123",
-    user_name="John Doe",
-)
-```
-
-### Step 4: Add an Evaluation
-
-Provide the execution ID (`enola_id`), a unique evaluation ID (`eval_id`), an evaluation `value` between 0 and 100, and a comment.
-
-```python
-eval.add_evaluation(
-    enola_id="8ed16f7d44263053c7fdbce834acf152",
-    eval_id="001",
-    value=85,  # Score between 0 and 100
-    comment="The response was informative and well-structured."
-)
-```
-
-### Step 5: Add an Evaluation by Level
-
-You can also provide an evaluation by level instead of a value. The evaluation by `level` has a value between 1 (Very Bad) and 5 (Very Good).
-
-```python
-eval.add_evaluation_by_level(
-    enola_id="8ed16f7d4426303eb86789e6e5429d11667fed7f456a7053c7fdbce834acf152",
-    eval_id="002",
-    level=4,
-    comment="Good response, helpful and concise."
-)
-```
-
-### Step 6: Execute the Evaluation Submission
-
-Submit the evaluation to the Enola-AI platform.
-
-```python
-result = eval.execute()
-```
-
-### Complete Example
-```python
-# Import libraries
-from enola import evaluation
-from enola.enola_types import EvalType
-from dotenv import load_dotenv
-import os
-
-# Set Your Enola Token
-load_dotenv()
-token = os.getenv("ENOLA_TOKEN")
-
-# Create an Evaluation Instance
-eval = evaluation.Evaluation(
-    token=token,
-    eval_type=EvalType.USER,
-    user_id="user_123",
-    user_name="John Doe",
-)
-
-# Add an Evaluation
-eval.add_evaluation(
-    enola_id="8ed16f7d4426303eb86789e6e5429d11667fed7f456a7053c7fdbce834acf152",
-    eval_id="001",
-    value=85,  # Score between 0 and 100
-    comment="The response was informative and well-structured."
-)
-
-# Add an Evaluation by Level
-eval.add_evaluation_by_level(
-    enola_id="8ed16f7d4426303eb86789e6e5429d11667fed7f456a7053c7fdbce834acf152",
-    eval_id="002",
-    level=4,   # Score between 1 and 5
-    comment="Good response, helpful and concise."
-)
-
-# Execute the Evaluation Submission
-result = eval.execute()
-```
-
-### Notes
-
-- **Evaluation Types**:
-  - `EvalType.USER`: Feedback provided by end-users.
-  - `EvalType.AUTO`: Automatic evaluations generated by the system.
-  - `EvalType.INTERNAL`: Internal evaluations by developers or administrators.
-- **Evaluation Values**: The `value` should be a number between 0 and 100.
-- **Evaluation by Level Values**: The `level` should be a number between 1 and 5.
-- **Evaluation IDs**: Use unique `eval_id`s for multiple evaluations.
-- **Execution ID**: The `enola_id` is the identifier of the execution you are evaluating.
-
-### Viewing Feedback on the Enola Platform
-
-After submitting feedback, you can log in to the [Enola-AI platform](https://enola-ai.com/) to view and manage your evaluations.
+[6.2. Steps in Enola-AI](docs/steps_in_enola_ai.md)
 
 ---
-## 5.5. Get Tracking: Extracting Information
 
-Enola-AI allows you to retrieve the Input and Output data from past executions for analysis or further processing. 
-![Get Tracking](docs/images/get_tracking.jpg)
+### 6.3. Feedback Evaluation
+Enola-AI provides a feedback system that allows users to evaluate AI agent executions. Feedback can be submitted either through the Enola-AI platform or programmatically via code. This helps in assessing the performance of your AI agents and gathering user insights for improvement. 
 
-Here's a simple example demonstrating how to extract information using Python.
-
-### Example Code
-
-```python
-# Import necessary libraries
-from enola import get_executions
-from enola.enola_types import ExecutionEvalFilter
-from dotenv import load_dotenv
-import os
-
-# Load .env file with token inside
-load_dotenv()
-
-# Set up your Enola token
-token = os.getenv("ENOLA_TOKEN")
-
-# Create a GetExecutions instance
-exec = get_executions.GetExecutions(token=token, raise_error_if_fail=False)
-
-# Define your query parameters
-exec.query(
-    date_from="2024-10-28T00:00",
-    date_to="2024-12-31T23:59",
-    limit=20,
-    eval_id_internal=ExecutionEvalFilter(
-        eval_id=["0"],
-        include=False  # Retrieve executions that have not been internally evaluated
-    )
-)
-
-# Retrieve and process data
-while exec.continue_execution and exec.get_page_number() < 70:
-    result_data = exec.get_next_page()
-    print("Page:", exec.get_page_number(), ", Data Length:", len(result_data.data))
-
-    if len(result_data.data) == 0:
-        break
-
-    for row in result_data.data:
-        # Extract and print details of each execution
-        print(f"Execution ID: {row.enola_id}")
-        print(f"Start Date: {row.start_dt}")
-        print(f"End Date: {row.end_dt}")
-        print(f"Successful: {row.successfull}")
-        print(f"Agent ID: {row.agent_id}")
-        print(f"Agent Name: {row.agent_name}")
-        print(f"User ID: {row.user_id}")
-        print(f"Session ID: {row.session_id}")
-        print(f"Channel: {row.channel}")
-        print(f"Message Input: {row.message_input}")
-        print(f"Message Output: {row.message_output}")
-        print("-------------------------------------")
-```
-
-## Explanation
-
-This code demonstrates how to extract execution data from the Enola-AI platform:
-
-1. **Create a `GetExecutions` Instance**: Initialize an instance of `GetExecutions` with your token.
-
-2. **Define Query Parameters**: Use the `query` method to specify the date range, limit, and filters for the executions you want to retrieve.
-
-   - **Date Range**: Retrieve executions from `"2024-10-28T00:00"` to `"2024-12-31T23:59"`.
-   - **Limit**: Set a limit of 20 executions per page.
-   - **Evaluation Filter**: Use `eval_id_internal` to exclude executions that have already been internally evaluated.
-
-3. **Retrieve and Process Data**: Use a loop to fetch and process each page of results.
-
-   - **Pagination Control**: The loop continues while there are more pages to retrieve and the page number is less than 70.
-   - **Data Check**: Break the loop if no data is returned.
-   - **Data Extraction**: For each execution, print out key details such as execution ID, dates, success status, agent information, user ID, session ID, channel, and messages.
-
-## Notes
-
-- **Adjust Query Parameters**: You can modify the `date_from`, `date_to`, `limit`, and other parameters in the `query` method to suit your needs.
-
-- **Data Processing**: The code above prints execution details to the console. You can modify the code to process the data as needed for your application, such as storing it in a database or performing analytics.
-
-- **Pagination**: The loop includes a condition to prevent infinite loops (`exec.get_page_number() < 70`). Adjust this limit based on your expected data volume.
-
-## Summary
-
-By running this code, you can extract execution information from the Enola-AI platform. This allows you to access and utilize your execution data for analysis, processing, reporting, or integrating with other systems.
+[6.3. Feedback Evaluation](docs/feedback_evaluation.md)
 
 ---
-## 6. Documentation
+
+### 6.4. Extracting Information
+
+Enola-AI allows you to retrieve the Input and Output data from past executions for analysis or further processing.
+
+[6.4. Extracting Information](docs/extracting_information.md)
+
+---
+
+## 7. Documentation: Sending data to Enola-AI
 
 In this section, you can find documentation about Enola-AI, including step-by-step instructions and examples, along with explanations of the system's functionalities:
 
-For the complete documentation, you can visit our [User Guide](docs/user_guide.md) covering the following sections:
-- 6.1. Sending Online Chat Data
-- 6.2. Sending Online Score Data
-- 6.3. Sending Multiple Tasks
-- 6.4. Sending File Information
-- 6.5. Sending API Information
-- 6.6. Sending Cost Information
-- 6.7. Sending Batch Score Data
+For the complete documentation, you can visit our guide Sending Data to Enola-AI covering the following sections:
+- [7. Sending Data to Enola-AI](docs/sending_data.md#7-documentation-sending-data-to-enola-ai)
+   - [7.1. Sending Online Chat Data](docs/sending_data.md#71-sending-online-chat-data)
+   - [7.2. Sending Online Score Data](docs/sending_data.md#72-sending-online-score-data)
+   - [7.3. Sending Multiple Tasks](docs/sending_data.md#73-sending-multiple-tasks)
+   - [7.4. Sending File Information](docs/sending_data.md#74-sending-file-information)
+   - [7.5. Sending API Information](docs/sending_data.md#75-sending-api-information)
+   - [7.6. Sending Cost Information](docs/sending_data.md#76-sending-cost-information)
+   - [7.7. Sending Batch Score Data](docs/sending_data.md#77-sending-batch-score-information)
 
 ---
 
-## 7. Summary
+## 8. Summary
 
 - This documentation provides a basic guide on using the Enola-AI Python library to initialize tracking and send data.
-- For more detailed documentation, you can visit our [User Guide](docs/user_guide.md).
-- For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Build a Chatbot using Ollama](docs/building_chatbot_ollama.md).
-- If you have questions, you are invited to visit our [Frequently Asked Questions](docs/faq.md) section.
+- For detailed documentation about sending data with Enola-AI, you can visit our [Sending Data to Enola-AI](docs/sending_data.md) guide.
 
+### 8.1. Building an Ollama Chatbot
+   - For a comprehensive guide on how to build a Chatbot using Ollama with Enola-AI Tracking, you can visit our section [Building an Ollama Chatbot](docs/building_chatbot_ollama.md).
+
+### 8.2. Frequently Asked Questions
+   - If you have questions, you are invited to visit our [Frequently Asked Questions](docs/faq.md) section.
+   
+### 8.3. Complete Code Examples
+   - If you want to check all the complete code examples, you can visit our [Complete Code Examples](docs/complete_code_examples.md) section.
 
 ---
 
-## 8. Contributing
+## 9. Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or corrections.
 
@@ -640,12 +384,12 @@ When contributing, please ensure to:
 
 ---
 
-## 9. License
+## 10. License
 
 This project is licensed under the **BSD 3-Clause License**.
 
 ---
 
-## 10. Contact
+## 11. Contact
 
 For any inquiries or support, please contact us at [help@huemulsolutions.com](mailto:help@huemulsolutions.com).

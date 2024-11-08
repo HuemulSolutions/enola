@@ -16,7 +16,7 @@
 
 ## 1. **Frequently Asked Questions**
 
-### 1.1 **Question: How secure is my data with Enola-AI?**
+### 1.1 **How secure is my data with Enola-AI?**
 
 **Answer:**
 
@@ -28,7 +28,7 @@ Enola-AI prioritizes data security and privacy:
 
 ---
 
-### 1.2. **Question: How does the token work? How can I obtain the token?**
+### 1.2. **How does the token work? How can I obtain the token?**
 
 **Answer:**
 
@@ -56,7 +56,7 @@ By properly obtaining and securing your token, you ensure that your application'
 
 ---
 
-### 1.3. **Question: What types of data can I track with Enola-AI?**
+### 1.3. **What types of data can I track with Enola-AI?**
 
 **Answer:**
 
@@ -71,7 +71,7 @@ Enola-AI allows you to track various types of data, including:
 
 ---
 
-### 1.4. **Question: How to handle the errors with Enola-AI?**
+### 1.4. **How to handle the errors with Enola-AI?**
 
 **Answer:**
 
@@ -127,7 +127,7 @@ By properly handling and logging errors, you maintain a detailed record of any i
 
 ---
 
-### 1.5. **Question: How to use Steps? What is the proper way to open and close them?**
+### 1.5. **How to use Steps? What is the proper way to open and close them?**
 
 **Answer:**
 
@@ -201,7 +201,7 @@ By properly opening and closing steps, you enable Enola-AI to accurately track t
 
 ---
 
-### 1.6. **Question: When Sending File Information, can I check the content inside the file?**
+### 1.6. **When Sending File Information, can I check the content inside the file?**
 
 **Answer:**
 
@@ -209,7 +209,7 @@ The content inside the file cannot be checked in Enola-AI, this is due to securi
 
 ---
 
-### 1.7. **Question: If I start the method tracking(), but the method execute() fails to execute, what happens with the data?**
+### 1.7. **If I start the method tracking(), but the method execute() fails to execute, what happens with the data?**
 
 **Answer:**
 
@@ -217,7 +217,7 @@ If the Tracking started but the method execute() fails, it means the data won't 
 
 ---
 
-### 1.8. **Question: How does the graphic interface work in Enola-AI?**
+### 1.8. **How does the graphic interface work in Enola-AI?**
 
 **Answer:**
 
@@ -226,7 +226,7 @@ You can visit https://enola-ai.com/ and Login with your Enola credentials. Insid
 
 ---
 
-### 1.9. **Question: How to link a model or chatbot with Enola-AI?**
+### 1.9. **How to link a model or chatbot with Enola-AI?**
 
 **Answer:**
 
@@ -264,7 +264,7 @@ For a comprehensive guide and example, please refer to our documentation on [Bui
 
 ---
 
-### 1.10. **Question: Does Enola-AI support integrations with other platforms or tools?**
+### 1.10. **Does Enola-AI support integrations with other platforms or tools?**
 
 **Answer:**
 
