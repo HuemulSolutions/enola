@@ -1,4 +1,4 @@
-## 6.3. Steps in Enola-AI
+## 6.2. Steps in Enola-AI
 
 In Enola-AI, the concept of **steps** is fundamental for tracking the execution flow of your AI agents. Each step represents a significant action or event in your agent's processing pipeline.
 

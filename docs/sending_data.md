@@ -1891,14 +1891,14 @@ else:
 
 ## Summary
 
-This documentation provided a guide on using the Enola-AI Python library to send data and explained the following sections:
-- 7.1. [Sending Online Chat Data](#71-sending-online-chat-data)
-- 7.2. [Sending Online Score Data](#72-sending-online-score-data)
-- 7.3. [Sending Multiple Tasks](#73-sending-multiple-tasks)
-- 7.4. [Sending File Information](#74-sending-file-information)
-- 7.5. [Sending API Information](#75-sending-api-information)
-- 7.6. [Sending Cost Information](#76-sending-cost-information)
-- 7.7. [Sending Batch Score Information](#77-sending-batch-score-information)
+- This documentation provided a guide on using the Enola-AI Python library to send data and explained the following sections:
+    - 7.1. [Sending Online Chat Data](#71-sending-online-chat-data)
+    - 7.2. [Sending Online Score Data](#72-sending-online-score-data)
+    - 7.3. [Sending Multiple Tasks](#73-sending-multiple-tasks)
+    - 7.4. [Sending File Information](#74-sending-file-information)
+    - 7.5. [Sending API Information](#75-sending-api-information)
+    - 7.6. [Sending Cost Information](#76-sending-cost-information)
+    - 7.7. [Sending Batch Score Information](#77-sending-batch-score-information)
 
 - For a comprehensive guide on how to build a Chatbot using Ollama, you can visit our section [Building an Ollama Chatbot](building_chatbot_ollama.md).
 - If you have questions, you are invited to visit our [Frequently Asked Questions](faq.md) section.

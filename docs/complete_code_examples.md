@@ -16,7 +16,7 @@ In this section you will find the complete code examples used in the Enola-AI do
 **Note: For these code to work, make sure you have configured your Enola-AI token.**
 To configure your token, you can follow the explanation in the Getting Started section from the Enola-AI documentation:
 
-[5. Getting Started](../README.md#5-getting-started) 
+[5. Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started)
 
 ---
 

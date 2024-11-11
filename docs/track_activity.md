@@ -1,4 +1,4 @@
-## 6.2. Track Activity
+## 6.1. Track Activity
 
 Enola-AI helps you to track the different interactions that are done by the system and the users. This allows you to keep track and monitor your AI solutions.
 

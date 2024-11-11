@@ -1,6 +1,6 @@
-## **Building an Ollama Chatbot**
+# **Building an Ollama Chatbot**
 
-### **Introduction**
+## **Introduction**
 
 If you want to build a chatbot to integrate it with Enola-AI and use its tracking features, you can follow this guide to build your own chatbot using Ollama, running Llama locally on your machine. Keep in mind, if you already have a chatbot or AI model, you can use that instead.
 
@@ -28,7 +28,7 @@ By the end of this guide, you'll have a fully functional chatbot that tracks and
 
 ---
 
-### **Prerequisites**
+## **Prerequisites**
 
 - **Python 3.7+**
 - **Enola-AI API Token**
@@ -36,7 +36,7 @@ By the end of this guide, you'll have a fully functional chatbot that tracks and
 
 ---
 
-### **Step 1: Set Up the Environment**
+## **Step 1: Set Up the Environment**
 
 #### **1.1 Install Ollama**
 
@@ -65,7 +65,7 @@ pip install langchain enola dotenv uuid langchain_ollama
 
 ---
 
-### **Step 2: Create the Chatbot Script**
+## **Step 2: Create the Chatbot Script**
 
 #### **2.1 Create a Python Script**
 
@@ -334,7 +334,7 @@ if __name__ == "__main__":
 
 ---
 
-### **Step 3: Understanding the Code**
+## **Step 3: Understanding the Code**
 
 Let's break down the code to understand how it works and how it meets the required functionalities.
 
@@ -498,7 +498,7 @@ else:
 
 ---
 
-### **Step 4: Running the Chatbot**
+## **Step 4: Running the Chatbot**
 
 #### **4.1 Replace Placeholder Values**
 
@@ -518,7 +518,7 @@ else:
 
 ---
 
-### **Step 5: Using the Chatbot**
+## **Step 5: Using the Chatbot**
 
 #### **5.1 Regular Conversation**
 
@@ -553,9 +553,9 @@ else:
 
 ---
 
-### **Step 6: Understanding How the Chatbot Meets the Requirements**
+## **Step 6: Understanding How the Chatbot Meets the Requirements**
 
-#### **6.1 Sending Online Chat Data**
+### **6.1 Sending Online Chat Data**
 
 - **Implementation**: Each user input and the corresponding LLM response are captured and sent to Enola-AI as separate interactions.
 - **Code Snippet**:
@@ -572,7 +572,7 @@ else:
   step_chat.add_extra_info("ModelResponse", response)
   ```
 
-#### **6.2 Sending Multiple Tasks**
+### **6.2 Sending Multiple Tasks**
 
 - **Implementation**: The chatbot validates user input and model responses in separate steps within each interaction.
 - **Code Snippet**:
@@ -594,7 +594,7 @@ else:
   # ...
   ```
 
-#### **6.3 Sending File Information**
+### **6.3 Sending File Information**
 
 - **Implementation**: When the user uploads a file, file details are logged in the interaction.
 - **Code Snippet**:
@@ -610,7 +610,7 @@ else:
   )
   ```
 
-#### **6.4 Sending API Information**
+### **6.4 Sending API Information**
 
 - **Implementation**: API call details to the local Ollama LLM are recorded within each interaction.
 - **Code Snippet**:
@@ -639,7 +639,7 @@ else:
   )
   ```
 
-#### **6.5 Sending Cost Information**
+### **6.5 Sending Cost Information**
 
 - **Implementation**: Token usage and estimated costs are calculated and included when closing the step in each interaction.
 - **Code Snippet**:
@@ -671,7 +671,7 @@ else:
 
 ---
 
-### **Step 7: Monitoring with Enola-AI**
+## **Step 7: Monitoring with Enola-AI**
 
 #### **7.1 Accessing the Enola-AI Dashboard**
 
@@ -695,7 +695,7 @@ else:
 
 ---
 
-### **Conclusion**
+## **Conclusion**
 
 By following this guide, you've successfully built a chatbot using Ollama and integrated Enola-AI tracking to monitor interactions comprehensively. This chatbot demonstrates all the required functionalities, providing valuable insights into user interactions and system performance.
 Additionally, you can use the primary fuction of this chatbot from an external script, sending a Question and receiving a Response from the chatbot.

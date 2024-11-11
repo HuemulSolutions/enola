@@ -1,4 +1,4 @@
-## 6.4. Feedback Evaluation 
+## 6.3. Feedback Evaluation 
 
 Enola-AI provides a feedback system that allows users to evaluate AI agent executions. Feedback can be submitted either through the Enola-AI platform or programmatically via code. This helps in assessing the performance of your AI agents and gathering user insights for improvement.
 
@@ -52,10 +52,10 @@ In the Enola-AI platform, you can create different categories for evaluations, e
 Practical example:
 You have to evaluate the "Format of the Response".
 
-Evaluation Category: "Format of the Response"
-Evaluation Category ID (`eval_id`): "02"
-Evaluation Value (`value`): 95
-Comment (`comment`): "The response was informative and well-structured."
+- Evaluation Category: "Format of the Response"
+- Evaluation Category ID (`eval_id`): "02"
+- Evaluation Value (`value`): 95
+- Comment (`comment`): "The response was informative and well-structured."
 
 Code example:
 ```python

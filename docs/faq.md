@@ -1,4 +1,4 @@
-## Frequently Asked Questions (FAQ)
+# Frequently Asked Questions (FAQ)
 
 ## Table of Contents
 
@@ -242,9 +242,9 @@ Example:
     # Import Langchain for Ollama
     from langchain_ollama import OllamaLLM
     ```
-2. **Call your model in your script**
+2. **Define the chatbot function in your script**
     ```python
-    # Import the method of your model
+    # Define the function of your model
     def ollama_chat(prompt, model="llama3.2"):
         llm = OllamaLLM(model=model)
         response = llm.invoke(prompt)
@@ -254,11 +254,15 @@ Example:
 3. **Call the model inside your code and store the response in a variable:**
 
     ```python
+	# Define user_input to store the user question
+	user_input = "What is Morse code?"
+	
     # Invoke the LLM to get the response
     response = ollama_chat(user_input)
+	print(response)
     ```
 
-This will allow you to easily store the response from your model into the variable `response`.
+This will allow you to store the response from your model into the variable `response`. You can use the response and integrate it with the Enola-AI workflow, by tracking the user input and the model output. You can follow the documentation [5. Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) to learn how you can integrate your AI model and start the tracking with Enola-AI.
 
 For a comprehensive guide and example, please refer to our documentation on [Building a Chatbot using Ollama](docs/building_chatbot_ollama.md), which walks you through the process of integrating a chatbot with Enola-AI step by step.
 
@@ -268,9 +272,9 @@ For a comprehensive guide and example, please refer to our documentation on [Bui
 
 **Answer:**
 
-Enola-AI is designed to be flexible and extensible:
+Yes, Enola-AI is designed to be flexible and extensible:
 
-- **API Access:** Use Enola-AI's API to integrate with other tools or platforms.
+- **API Access:** Use Enola-AI's SDK library to integrate with other tools or platforms.
 - **Custom Integrations:** You can build your own custom integrations based on your application's requirements.
 
 ---
