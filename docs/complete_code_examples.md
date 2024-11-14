@@ -1,5 +1,56 @@
 # Complete Code Examples
 
+In this section you will find the complete code examples used in the Enola-AI documentation.
+
+**Note: Before using the provided codes, make sure you have:**
+
+#### **Required Python Packages:**
+Make sure you installed the Enola-AI Python library and necessary libraries, you can install it by running the following command in your command prompt or terminal.
+```bash
+pip install langchain enola dotenv uuid langchain_ollama
+```
+This will install Enola-AI library, other necessary libraries and LangChain (a framework that helps facilitate the integration of large language models into applications).
+
+#### **Your Enola-AI token:**
+To configure your token, you can follow the explanation in the [Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) section from the Enola-AI documentation.
+
+#### **A functional Chatbot or AI model:**
+You can use your own AI model or you can check our user guide to build a chatbot using Ollama, by visiting our section [Building an Ollama Chatbot](docs/building_chatbot_ollama.md).
+In the next code examples, when a chatbot is required, it is going to be imported in the following way:
+
+```python
+# example_code.py
+
+# Import your model/chatbot function 
+from ollama_chatbot import ollama_chat # ensure that ollama_chatbot.py (or your own model class) is available
+```
+This approach asssumes you have your chatbot/model function defined in a different script (e.g. ollama_chatbot.py).
+
+Simple example of a chatbot/model class:
+```python
+# ollama_chatbot.py
+
+# Import Langchain to handle Ollama through code
+from langchain_ollama import OllamaLLM
+
+# Define the ollama_chat function
+def ollama_chat(prompt, model="llama3.2"): # define the user question (prompt) and your Ollama model version
+    llm = OllamaLLM(model=model)
+    response = llm.invoke(prompt)
+    return response                        # return a model response after sending a user question
+```
+
+Then in your code, you can get a `response` when invoking `ollama_chat()` with the message from user `user_input`.
+```python
+# example_code.py
+
+response = ollama_chat(user_input)  # the response from the external model/chatbot
+```
+
+**By understanding how to load your **Enola-AI token** and how to invoke a chatbot/model to obtain a `response`, you will be able to use any code example from Enola-AI documentation. If you have your own custom model, make sure to replace the respective `imports` and `functions` with your own.**
+
+---
+
 ## Table of Contents
 
    - 7.1. [Sending Online Chat Data](#71-complete-example-sending-online-chat-data)
@@ -10,13 +61,6 @@
    - 7.6. [Sending Cost Information](#76-complete-example-sending-cost-information)
    - 7.7. [Sending Batch Score Information](#77-complete-example-sending-batch-score-information)
    - 8.1. [Building an Ollama Chatbot](#81-complete-example-building-an-ollama-chatbot)
-   
-In this section you will find the complete code examples used in the Enola-AI documentation.
-
-**Note: For these code to work, make sure you have configured your Enola-AI token.**
-To configure your token, you can follow the explanation in the Getting Started section from the Enola-AI documentation:
-
-[5. Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started)
 
 ---
 
@@ -185,7 +229,7 @@ print(f"Model Score: {model_score}")
 ```python
 from enola.tracking import Tracking
 from enola.enola_types import ErrOrWarnKind
-from enola_ollama_v2 import ollama_chat  # Import your model/chatbot function
+from ollama_chatbot import ollama_chat  # Import your model/chatbot function
 from dotenv import load_dotenv
 import os
 import uuid
@@ -471,7 +515,7 @@ monitor.execute(
 
 ```python
 from enola.tracking import Tracking
-from enola_ollama_v2 import ollama_chat  # Import your model/chatbot
+from ollama_chatbot import ollama_chat  # Import your model/chatbot
 from dotenv import load_dotenv
 import os
 import uuid
@@ -630,7 +674,7 @@ step_batch.add_extra_info("BatchProcessingInfo", batch_info)
 failed_record_ids = [101, 202, 303, 404, 505]
 
 if failed_records > 0:
-    # Add the error without the extra_data parameter
+    # Add an error indicating batch processing failures
     step_batch.add_error(
         id="BatchProcessingErrors",
         message=f"{failed_records} records failed to process.",
@@ -667,6 +711,7 @@ else:
 #### **8.1. Complete Example: Building an Ollama Chatbot**
 
 ```python
+# Import necessary libraries
 import os
 import uuid
 from dotenv import load_dotenv
@@ -685,11 +730,13 @@ token = os.getenv("ENOLA_TOKEN")
 # Generate a session_id (remains the same for the entire chat session)
 session_id = str(uuid.uuid4())
 
+# Define the function for invoking the answer from the model
 def ollama_chat(prompt, model="llama3.2"):
     llm = OllamaLLM(model=model)
     response = llm.invoke(prompt)
     return response
 
+# Define the chatbot functions
 def chatbot():
     print("Welcome to the Ollama Chatbot!")
     print("Type 'exit' to end the conversation.")

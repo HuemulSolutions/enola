@@ -71,8 +71,7 @@ In your Command Prompt (Windows) or Terminal (Linux/macOS) type:
 
 By doing a pip install, you have the Enola-AI Python library and its dependencies automatically installed on your device.
 
-**Note: Advanced users may prefer to use a Virtual Environment to manage dependencies and 
-isolate the Enola-AI library from other Python packages.**
+**Note: Advanced users may prefer to use a Virtual Environment to manage dependencies and isolate the Enola-AI library from other Python packages.**
 
 ---
 
@@ -83,7 +82,7 @@ To start using the Enola-AI Python library, follow the steps below to initialize
 ### 5.1. Initializing Tracking
 To connect to Enola and initialize tracking you will need:
 - A token provided by Enola-AI. This token is essential for authentication and authorization purposes
-- A Python script. You can start by creating an empty Python file with a .py extension (eg. enola_sample.py, enola_script.py)
+- A Python script. You can start by creating an empty Python file with a .py extension (e.g. enola_sample.py, enola_script.py)
 
 #### **5.1.1. Loading Enola API Token**
 **You can load the token from a `.env` file (recommended):**
@@ -184,6 +183,7 @@ model_response = "I'm here to assist you in finding the help or information you 
 ```
 
 **Note**: You can replace the simulated response with an actual model response (e.g. GPT-4, Ollama, BERT).
+You can check our user guide to build a chatbot using Ollama, by visiting our section [Building an Ollama Chatbot](docs/building_chatbot_ollama.md).
 
 #### **5.1.9. Add the Model's Response to the Step**
 ```python
@@ -335,7 +335,7 @@ Enola-AI provides a feedback system that allows users to evaluate AI agent execu
 
 ### 6.4. Extracting Information
 
-Enola-AI allows you to retrieve the Input and Output data from previous executions for analysis or further processing.
+Enola-AI allows you to retrieve the Input and Output data from previous executions for analysis or further manual and automatic processing.
 
 [6.4. Extracting Information](docs/extracting_information.md)
 
@@ -343,7 +343,7 @@ Enola-AI allows you to retrieve the Input and Output data from previous executio
 
 ## 7. Documentation: Sending Data to Enola-AI
 
-In this section, you can find documentation about Enola-AI, including step-by-step instructions and examples, along with explanations of the system's functionalities:
+In this section, you will find complete documentation about sending data to the Enola-AI servers, this guide includes step-by-step instructions and code examples, along with explanations of the system's functionalities.
 
 For the complete documentation, you can visit our guide Sending Data to Enola-AI covering the following sections:
 - [7. Sending Data to Enola-AI](docs/sending_data.md#7-documentation-sending-data-to-enola-ai)

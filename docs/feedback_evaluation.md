@@ -1,15 +1,22 @@
 ## 6.3. Feedback Evaluation 
 
-Enola-AI provides a feedback system that allows users to evaluate AI agent executions. Feedback can be submitted either through the Enola-AI platform or programmatically via code. This helps in assessing the performance of your AI agents and gathering user insights for improvement.
+Enola-AI provides a feedback system that allows users to evaluate AI agent executions. Feedback can be submitted either through the Enola-AI platform or programmatically via code. This helps in assessing the performance of your AI agents and gathering user and system insights for improvement.
+
+Feedback evaluation is a powerful feature, due to the importance of evaluating a system through feedback, this allows to get a better insight about the quality of the interactions that the users are having with the system and their level of satisfaction. By detecting the weak or problematic areas, you will be able to take better decisions to improve your AI solutions.
+
+As shown in the image, Enola-AI provides a Feedback Evaluation feature, enabling you to send evaluation feedback to the Enola-AI servers for further analysis and processing, adding value to the AI system.
 
 ![Feedback Evaluation](images/feedback_evaluation.jpg)
 
-By incorporating this feedback mechanism, you can effectively monitor and improve your AI agents based on user evaluations.
+By incorporating this feedback mechanism, you can effectively monitor and improve your AI agents based on user and systematic evaluations.
 
 
 ### Submitting Feedback via Code
 
 You can submit feedback using the Enola-AI SDK in Python. Here's a simple example:
+
+**Note: Before using the provided codes, make sure you have your Enola-AI token configured:
+To configure your token, you can follow the explanation in the [Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) section from the Enola-AI documentation.**
 
 ### Step 1: Import Necessary Modules
 
@@ -90,6 +97,7 @@ eval.add_evaluation_by_level(
     comment="Good response, helpful and concise."
 )
 ```
+This approach offers simplicity for the user, by avoiding the need to ask a user to measure with a scale between 0-100. Instead, you measure with only 5 possible options.
 
 ### Step 6: Execute the Evaluation Submission
 
@@ -145,4 +153,8 @@ By following these steps, you can send feedback for evaluations using Python.
 
 You can log in to the [Enola-AI platform](https://enola-ai.com/) to view and manage your evaluations. There you can create feedback evaluations, by choosing an interaction in the Agent Executions section and clicking the icon "Create Evaluation". Then you can send the feedback and choose the corresponding parameters.
 
----
+### Next Steps for Feedback Evaluations
+
+In the next section [6.4. Extracting Information](docs/extracting_information.md), you will learn how to extract information from Enola-AI using Python. This feature is important, as it can be combined with Feedback Evaluations. This means you can retrieve data by obtaining Enola data records that meet specified custom requirements, while also submitting feedback evaluations with scores for each retrieved record. The score will depend on how well each record aligns with your specific requirements.
+
+By leveraging these Enola-AI features, you will be able to customize your own criteria to obtain the data you need and generate systematic feedback evaluations.

@@ -1,6 +1,9 @@
 # 7. Documentation: Sending Data to Enola-AI
 
-In this section, you will find complete documentation about sending data to the Enola-AI servers, this guide includes step-by-step instructions and examples, along with explanations of the system's functionalities:
+In this section, you will find complete documentation about sending data to the Enola-AI servers, this guide includes step-by-step instructions and code examples, along with explanations of the system's functionalities.
+
+**Note: Before using the provided codes, make sure you have your Enola-AI token configured:
+To configure your token, you can follow the explanation in the [Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) section from the Enola-AI documentation.**
 
 ## Table of Contents
 
@@ -98,7 +101,7 @@ When working with conversational AI agents, it's essential to track user interac
    model_response = "The Honda Civic offers great performance at a reasonable price."
    ```
 
-   > **Note**: Replace the simulated response with actual model integration in a production environment.
+   > **Note**: Replace the simulated response with the actual output from your language model.
 
 8. **Add the Model's Response to the Step**
 
@@ -223,8 +226,8 @@ monitor.execute(
     # Simulated model response
     model_response = "The Honda Civic offers great performance at a reasonable price."
     ```
-   - However, when your Python script effectively connects with an LLM Model (eg. Ollama running on your local machine or through an API), you can expect a real response that will be stored in the variable `model_response`.
-   - You can check our user guide to Build a Chatbot using Ollama, you can visit our section [Building an Ollama Chatbot](building_chatbot_ollama.md).
+   - However, when your Python script effectively connects with an LLM Model (e.g. Ollama running on your local machine or through an API), you can expect a real response that will be stored in the variable `model_response`.
+   - You can check our user guide to build a chatbot using Ollama, by visiting our section [Building an Ollama Chatbot](building_chatbot_ollama.md).
   
 
 - **Error Handling**:
@@ -546,9 +549,12 @@ First, import the necessary modules and initialize the `Tracking` object. Use a 
 In this example, a chatbot made with Ollama will be used for model responses. You can use your own model or visit our section [Build a Chatbot using Ollama](building_chatbot_ollama.md).
 
 ```python
+# Import your model/chatbot function, in this case the function ollama_chat from class ollama_chatbot.py
+from ollama_chatbot import ollama_chat
+
+# Import necessary libraries
 from enola.tracking import Tracking
 from enola.enola_types import ErrOrWarnKind
-from ollama_chatbot import ollama_chat  # Import your model/chatbot, in this case ollama_chatbot.py
 from dotenv import load_dotenv
 import os
 import uuid
@@ -713,9 +719,12 @@ print(f"Response: {response}")
 Here's the full code combined:
 
 ```python
+# Import your model/chatbot function, in this case the function ollama_chat from class ollama_chatbot.py
+from ollama_chatbot import ollama_chat
+
+# Import necessary libraries
 from enola.tracking import Tracking
 from enola.enola_types import ErrOrWarnKind
-from ollama_chatbot import ollama_chat  # Import your model/chatbot, in this case ollama_chatbot.py
 from dotenv import load_dotenv
 import os
 import uuid
@@ -1484,8 +1493,11 @@ monitor.close_step_others(
 #### **Complete Example: Sending Cost Information**
 
 ```python
+# Import your model/chatbot function, in this case the function ollama_chat from class ollama_chatbot.py
+from ollama_chatbot import ollama_chat
+
+# Import necessary libraries
 from enola.tracking import Tracking
-from ollama_chatbot import ollama_chat  # Import your model/chatbot, in this case from ollama_chatbot.py
 from dotenv import load_dotenv
 import os
 import uuid
@@ -1738,6 +1750,7 @@ In scenarios where your application processes large datasets to generate scores 
    failed_record_ids = [101, 202, 303, 404, 505]
 
    if failed_records > 0:
+   # Add an error indicating batch processing failures
        step_batch.add_error(
            id="BatchProcessingErrors",
            message=f"{failed_records} records failed to process.",
@@ -1824,7 +1837,7 @@ step_batch.add_extra_info("BatchProcessingInfo", batch_info)
 failed_record_ids = [101, 202, 303, 404, 505]
 
 if failed_records > 0:
-    # Add the error without the extra_data parameter
+    # Add an error indicating batch processing failures
     step_batch.add_error(
         id="BatchProcessingErrors",
         message=f"{failed_records} records failed to process.",

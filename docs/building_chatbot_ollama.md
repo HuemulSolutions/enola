@@ -24,7 +24,7 @@ Basic architecture with Enola-AI and Tracking feature:
 
 ![Track Activity](images/track_activity.jpg)
 
-By the end of this guide, you'll have a fully functional chatbot that tracks and logs data to the Enola-AI platform.
+By the end of this guide, you will have a fully functional chatbot that tracks and logs data to the Enola-AI platform.
 
 ---
 
@@ -52,7 +52,7 @@ Open your terminal and run:
 pip install langchain enola dotenv uuid langchain_ollama
 ```
 
-- This will install LangChain (a framework that helps facilitate the integration of large language models into applications) and other necessary libraries.
+This will install Enola-AI library, other necessary libraries and LangChain (a framework that helps facilitate the integration of large language models into applications).
 
 #### **1.3 Set Up the Enola-AI API Token**
 
@@ -63,6 +63,8 @@ pip install langchain enola dotenv uuid langchain_ollama
    ENOLA_TOKEN=your_api_token
    ```
 
+**Note: for a comprehensive explanation about loading Enola-AI token, you can visit our [Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) section from the Enola-AI documentation**
+
 ---
 
 ## **Step 2: Create the Chatbot Script**
@@ -72,9 +74,12 @@ pip install langchain enola dotenv uuid langchain_ollama
 - Create a file named `ollama_chatbot.py`.
 - Copy and paste the provided code into this file.
 
+**Note: for the example codes in Enola-AI documentation, `ollama_chatbot.py` will be assumed as the class containing the chatbot logic. This is relevant when you require to invoke this class from another class.**
+
 #### **Complete Example: Building an Ollama Chatbot**
 
 ```python
+# Import necessary libraries
 import os
 import uuid
 from dotenv import load_dotenv
@@ -93,11 +98,13 @@ token = os.getenv("ENOLA_TOKEN")
 # Generate a session_id (remains the same for the entire chat session)
 session_id = str(uuid.uuid4())
 
+# Define the function for invoking the answer from the model
 def ollama_chat(prompt, model="llama3.2"):
     llm = OllamaLLM(model=model)
     response = llm.invoke(prompt)
     return response
 
+# Define the chatbot functions
 def chatbot():
     print("Welcome to the Ollama Chatbot!")
     print("Type 'exit' to end the conversation.")
@@ -127,7 +134,7 @@ def chatbot():
             session_id=session_id,
             channel_id="console",
             ip="127.0.0.1",
-            message_input=user_input  # User's input
+            message_input=user_input  # user input
         )
 
         # Step 1: Validate User Input
@@ -165,7 +172,7 @@ def chatbot():
         num_iteratons += 1  # num_iteratons = 2
         step_chat = monitor.new_step(f"User Interaction {interaction_count}")
 
-        # Set the message_input attribute of the step to the user's input
+        # Set the message_input attribute of the step to the user input
         step_chat.message_input = user_input
 
         try:
@@ -349,6 +356,7 @@ Let's break down the code to understand how it works and how it meets the requir
 #### **3.2 Defining the Ollama Chat Function**
 
 ```python
+# Define the function for invoking the answer from the model
 def ollama_chat(prompt, model="llama3.2"):
     llm = OllamaLLM(model=model)
     response = llm.invoke(prompt)
@@ -373,6 +381,7 @@ print("Response:", response)
 #### **3.3 The Chatbot Function**
 
 ```python
+# Define the chatbot functions
 def chatbot():
     print("Welcome to the Ollama Chatbot!")
     print("Type 'exit' to end the conversation.")
@@ -407,7 +416,7 @@ monitor = Tracking(
     session_id=session_id,
     channel_id="console",
     ip="127.0.0.1",
-    message_input=user_input  # User's input
+    message_input=user_input  # user input
 )
 ```
 
@@ -429,7 +438,7 @@ else:
     # ...
 ```
 
-- **Validation Step**: A new step is created to validate the user's input.
+- **Validation Step**: A new step is created to validate the user input.
 - **Error Handling**: If the input is empty, an error is logged, and the interaction is terminated.
 
 #### **3.7 Processing User Commands**
@@ -564,7 +573,7 @@ else:
   # Create a Tracking object for this interaction
   monitor = Tracking(
       # ...
-      message_input=user_input  # User's input
+      message_input=user_input  # user input
   )
 
   # Add user's question and model's response to the step
@@ -687,7 +696,7 @@ else:
 
 #### **7.3 Analyzing the Data**
 
-- **User Input**: The user's input is available in the `message_input` field of the `Tracking` object and under "UserInput" in extra info.
+- **User Input**: The user input is available in the `message_input` field of the `Tracking` object and under "UserInput" in extra info.
 - **Model Response**: The assistant's response is available in the `message_output` and under "ModelResponse" in extra info.
 - **File Information**: If you uploaded files, their details are under the respective interaction steps.
 - **API Information**: API call details are logged under each interaction step.
@@ -697,6 +706,6 @@ else:
 
 ## **Conclusion**
 
-By following this guide, you've successfully built a chatbot using Ollama and integrated Enola-AI tracking to monitor interactions comprehensively. This chatbot demonstrates all the required functionalities, providing valuable insights into user interactions and system performance.
+By following this guide, you've successfully built a chatbot using Ollama and integrated Enola-AI tracking to monitor interactions comprehensively. This chatbot demonstrates some of the important functionalities that Enola-AI has to offer, providing valuable insights into user interactions and system traceability.
 Additionally, you can use the primary fuction of this chatbot from an external script, sending a Question and receiving a Response from the chatbot.
-This allows you to try and understand the different features from Enola-AI.
+This allows you to try by yourself and understand the different features from Enola-AI.

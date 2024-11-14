@@ -43,7 +43,7 @@ The token in Enola-AI is a secure credential that authenticates your application
 2. **Obtaining the Token:**
 
    - **Sign Up in https://enola-ai.com/**
-   - After signing up, you will receive a token From Enola-AI.
+   - After signing up, you will receive a token from Enola-AI.
 
 
 3. **Security Considerations:**
@@ -205,15 +205,15 @@ By properly opening and closing steps, you enable Enola-AI to accurately track t
 
 **Answer:**
 
-The content inside the file cannot be checked in Enola-AI, this is due to security and privacy reasons. When uploading files, Enola-AI logs the information of the file, but not its content. This means the files you are uploading must be in its own repository.
+The content inside the file cannot be checked in Enola-AI; this is due to security and privacy reasons. When uploading files, Enola-AI logs the information of the file, but not its content. This means the files you are uploading must be stored in your own repository.
 
 ---
 
-### 1.7. **If I start the method tracking(), but the method execute() fails to execute, what happens with the data?**
+### 1.7. **If I start the method `tracking()`, but the method `execute()` fails to execute, what happens with the data?**
 
 **Answer:**
 
-If the Tracking started but the method execute() fails, it means the data won't be send to the Enola-AI servers. It is important that you execute this function if you want your data to be processed by Enola-AI. It is strongly recommended to handle exceptions in every section of your code, to avoid losing your data and keeping track of the potential errors that may appear during the execution of the different stages in a system.
+If the `tracking()` started but the method `execute()` fails, it means the data won't be sent to the Enola-AI servers. It is important that you execute this function if you want your data to be processed by Enola-AI. It is strongly recommended to handle exceptions in your code, to avoid losing your data and keeping track of the potential errors that may appear during the execution of the different stages in a system.
 
 ---
 
@@ -221,7 +221,7 @@ If the Tracking started but the method execute() fails, it means the data won't 
 
 **Answer:**
 
-You can visit https://enola-ai.com/ and Login with your Enola credentials. Inside the Enola-AI platform, you can check and review all your trackings sessions in section "Agent Executions". There it is possible to track any step or interaction that has been logged. Allowing you to monitor and evaluate your models.
+You can visit https://enola-ai.com/ and log in with your Enola credentials. Inside the Enola-AI platform, you can check and review all your tracking sessions in section "Agent Executions". There, it is possible to track any step or interaction that has been logged, allowing you to monitor and evaluate your models.
 
 
 ---
@@ -232,14 +232,27 @@ You can visit https://enola-ai.com/ and Login with your Enola credentials. Insid
 
 Linking your model or chatbot with Enola-AI involves integrating the Enola-AI tracking into your application's codebase. Here's how you can do it:
 
-You have to import the class or the method of your model/chatbot into your code.
+You have to import the function from the class of your model/chatbot into your code.
 For this purpose, it is recommended to use Langchain (a framework that helps facilitate the integration of large language models into applications).
 
-Example:
+Simple example of a chatbot/model class:
+```python
+# ollama_chatbot.py
+
+# Import langchain to handle Ollama through code
+from langchain_ollama import OllamaLLM
+
+# Define the ollama_chat function
+def ollama_chat(prompt, model="llama3.2"): # define the user question (prompt) and Ollama model version
+    llm = OllamaLLM(model=model)
+    response = llm.invoke(prompt)
+    return response                        # return a model response after sending a user question
+```
+
 
 1. **Import the Langchain library for Ollama**
     ```python
-    # Import Langchain for Ollama
+    # Import Ollama from Langchain
     from langchain_ollama import OllamaLLM
     ```
 2. **Define the chatbot function in your script**

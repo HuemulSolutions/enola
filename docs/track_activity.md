@@ -7,7 +7,7 @@ In a basic AI solution, you would use this architecture:
 ![Basic Architecture](images/basic_architecture.jpg)
 
 Basic architecture with AI solution:
-- The User sends and Input.
+- The User sends an Input.
 - The Agent returns an Output.
 
 When using Enola-AI, you can add Track Activity, allowing you to track any interactions from the system and users.
@@ -23,7 +23,7 @@ Code explanation:
 5. You send the data to Enola-AI.
 
 Basic architecture with Enola-AI:
-- The User sends and Input.
+- The User sends an Input.
 - The Agent returns an Output.
 - Track Activity is sent to Enola-AI.
 

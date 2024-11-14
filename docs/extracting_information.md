@@ -1,11 +1,15 @@
 ## 6.4. Extracting Information
 
-Enola-AI allows you to retrieve the Input and Output data from past executions for analysis or further processing. 
+Enola-AI allows you to retrieve the Input and Output data from previous executions for analysis or further manual and automatic processing. 
+
 ![Get Tracking](images/get_tracking.jpg)
 
 Here's a simple example demonstrating how to extract information using Python.
 
-### Complete Example: Get Tracking
+**Note: Before using the provided codes, make sure you have your Enola-AI token configured:
+To configure your token, you can follow the explanation in the [Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) section from the Enola-AI documentation.**
+
+### Complete Example: Extracting Information - Get Tracking
 
 ```python
 # Import necessary libraries
@@ -80,9 +84,9 @@ This code demonstrates how to extract execution data from the Enola-AI platform:
 - **Pagination**: The loop includes a condition to prevent infinite loops (`exec.get_page_number() < 70`). Adjust this limit based on your expected data volume.
 
 
-## How to Extract Information and create automatic Evaluations
+## How to Extract Information and Create Systematic Evaluations
 
-When combining the extracting information and evaluations features, you can create automatic evaluations when extracting information.
+When combining the extracting information and evaluations features, you can create systematic evaluations when extracting information.
 By following the steps from the Evaluation Feedback section, you can create an evaluation category.
 In this case, you can create an evaluation category that will rate a submission based on the length of its text. For this purpose, you can messure the length of the text with a number, this number will be considered as the `value`, and this `value` will be inside a range of different values.
 Let's say the higher the `value`, the better:
@@ -124,7 +128,7 @@ from enola.enola_types import EvalType
         result = eval.execute()
 ```
 		
-## Complete Example: Extract Information and create automatic Evaluations
+## Complete Example: Extract Information and Create Systematic Evaluations
 
 Here is the complete example code after combining both features:
 
@@ -194,8 +198,10 @@ while exec.continue_execution and exec.get_page_number() < 70:
         result = eval.execute()
 ```
 
-By following this example, you should be able to retrieve data systematically and rate your evaluations automatically.
+By following this example, you should be able to retrieve and evaluate data systematically.
 
 ## Summary
 
-With these features you can extract information from the Enola-AI platform. This allows you to access and utilize your execution data for analysis, processing, reporting, or integrating with other systems.
+With these features you can extract information from the Enola-AI platform. This allows you to access and utilize your execution data for analysis, processing, reporting, evaluating or integrating with other systems.
+
+As demonstrated earlier, the Extract Information feature can also be integrated with Feedback Evaluations to facilitate systematic assessments.
