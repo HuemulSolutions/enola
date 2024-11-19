@@ -15,14 +15,14 @@ This will install Enola-AI library, other necessary libraries and LangChain (a f
 To configure your token, you can follow the explanation in the [Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) section from the Enola-AI documentation.
 
 #### **A functional Chatbot or AI model:**
-You can use your own AI model or you can check our user guide to build a chatbot using Ollama, by visiting our section [Building an Ollama Chatbot](docs/building_chatbot_ollama.md).
+You can use your own AI model or you can check our user guide to build a chatbot using Ollama, by visiting our section [Building an Ollama Chatbot](building_chatbot_ollama.md).
 In the next code examples, when a chatbot is required, it is going to be imported in the following way:
 
 ```python
 # example_code.py
 
 # Import your model/chatbot function 
-from ollama_chatbot import ollama_chat # ensure that ollama_chatbot.py (or your own model class) is available
+from ollama_chatbot import ollama_chat # ensure ollama_chatbot.py (or your own model) is available
 ```
 This approach asssumes you have your chatbot/model function defined in a different script (e.g. ollama_chatbot.py).
 
@@ -34,7 +34,7 @@ Simple example of a chatbot/model class:
 from langchain_ollama import OllamaLLM
 
 # Define the ollama_chat function
-def ollama_chat(prompt, model="llama3.2"): # define the user question (prompt) and your Ollama model version
+def ollama_chat(prompt, model="llama3.2"): # define user question (prompt) and Ollama model version
     llm = OllamaLLM(model=model)
     response = llm.invoke(prompt)
     return response                        # return a model response after sending a user question

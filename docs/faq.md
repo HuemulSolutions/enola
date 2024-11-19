@@ -277,7 +277,7 @@ def ollama_chat(prompt, model="llama3.2"): # define the user question (prompt) a
 
 This will allow you to store the response from your model into the variable `response`. You can use the response and integrate it with the Enola-AI workflow, by tracking the user input and the model output. You can follow the documentation [5. Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) to learn how you can integrate your AI model and start the tracking with Enola-AI.
 
-For a comprehensive guide and example, please refer to our documentation on [Building a Chatbot using Ollama](docs/building_chatbot_ollama.md), which walks you through the process of integrating a chatbot with Enola-AI step by step.
+For a comprehensive guide and example, please refer to our documentation on [Building a Chatbot using Ollama](building_chatbot_ollama.md), which walks you through the process of integrating a chatbot with Enola-AI step by step.
 
 ---
 

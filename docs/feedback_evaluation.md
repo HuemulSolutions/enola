@@ -83,7 +83,7 @@ In this example, the ranges are configured in the following way (High score is V
 
 This means a `value=95` will be considered as Very Good for the "Format of the Response".
 
-**Note: Inside the Enola-AI Platform, you can create and choose the Category name, the ID for `eval_id`, the different ranges for `value`, and a description**
+**Note: Inside the Enola-AI Platform, you can create and choose the Category name, the ID for `eval_id`, the different ranges for `value`, and a description.**
 
 ### Step 5: Add an Evaluation by Level
 
@@ -155,6 +155,6 @@ You can log in to the [Enola-AI platform](https://enola-ai.com/) to view and man
 
 ### Next Steps for Feedback Evaluations
 
-In the next section [6.4. Extracting Information](docs/extracting_information.md), you will learn how to extract information from Enola-AI using Python. This feature is important, as it can be combined with Feedback Evaluations. This means you can retrieve data by obtaining Enola data records that meet specified custom requirements, while also submitting feedback evaluations with scores for each retrieved record. The score will depend on how well each record aligns with your specific requirements.
+In the next section [6.4. Extracting Information](extracting_information.md), you will learn how to extract information from Enola-AI using Python. This feature is important, as it can be combined with Feedback Evaluations. This means you can retrieve data by obtaining Enola data records that meet specified custom requirements, while also submitting feedback evaluations with scores for each retrieved record. The score will depend on how well each record aligns with your specific requirements.
 
 By leveraging these Enola-AI features, you will be able to customize your own criteria to obtain the data you need and generate systematic feedback evaluations.
