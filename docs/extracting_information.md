@@ -9,7 +9,7 @@ Here's a simple example demonstrating how to extract information using Python.
 **Note: Before using the provided codes, make sure you have your Enola-AI token configured:
 To configure your token, you can follow the explanation in the [Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) section from the Enola-AI documentation.**
 
-### Complete Example: Extracting Information - Get Tracking
+### Complete Example: Extracting Information
 
 ```python
 # Import necessary libraries
@@ -109,7 +109,7 @@ from enola.enola_types import EvalType
 - At the end of your code (inside the `for` loop), you have to create, add and execute an evaluation:
 ```python
 # ... your code
-		# Create an Evaluation Instance
+        # Create an Evaluation Instance
         eval = evaluation.Evaluation(
             token=token,
             eval_type=EvalType.AUTO,
@@ -198,7 +198,7 @@ while exec.continue_execution and exec.get_page_number() < 70:
         result = eval.execute()
 ```
 
-By following this example, you should be able to retrieve and evaluate data systematically.
+By following this example, you will be able to retrieve and evaluate data systematically.
 
 ## Summary
 

@@ -44,7 +44,7 @@ Then in your code, you can get a `response` when invoking `ollama_chat()` with t
 ```python
 # example_code.py
 
-response = ollama_chat(user_input)  # the response from the external model/chatbot
+model_response = ollama_chat(user_input)  # the response from the external model/chatbot
 ```
 
 **By understanding how to load your **Enola-AI token** and how to invoke a chatbot/model to obtain a `response`, you will be able to use any code example from Enola-AI documentation. If you have your own custom model, make sure to replace the respective `imports` and `functions` with your own.**
@@ -53,6 +53,8 @@ response = ollama_chat(user_input)  # the response from the external model/chatb
 
 ## Table of Contents
 
+   - 6.3. [Feedback Evaluation](#63-feedback-evaluation)
+   - 6.4. [Extracting Information](#64-extracting-information)
    - 7.1. [Sending Online Chat Data](#71-complete-example-sending-online-chat-data)
    - 7.2. [Sending Online Score Data](#72-complete-example-sending-online-score-data)
    - 7.3. [Sending Multiple Tasks](#73-complete-example-sending-multiple-tasks)
@@ -61,6 +63,128 @@ response = ollama_chat(user_input)  # the response from the external model/chatb
    - 7.6. [Sending Cost Information](#76-complete-example-sending-cost-information)
    - 7.7. [Sending Batch Score Information](#77-complete-example-sending-batch-score-information)
    - 8.1. [Building an Ollama Chatbot](#81-complete-example-building-an-ollama-chatbot)
+
+---
+
+#### **Complete Example: Extracting Information**
+
+```python
+# Import necessary libraries
+from enola import get_executions
+from enola.enola_types import ExecutionEvalFilter
+from dotenv import load_dotenv
+import os
+
+# Load .env file with token inside
+load_dotenv()
+
+# Set up your Enola token
+token = os.getenv("ENOLA_TOKEN")
+
+# Create a GetExecutions instance
+exec = get_executions.GetExecutions(token=token, raise_error_if_fail=False)
+
+# Define your query parameters
+exec.query(
+    date_from="2024-10-28T00:00",
+    date_to="2024-12-31T23:59",
+    limit=20
+)
+
+# Retrieve and process data
+while exec.continue_execution and exec.get_page_number() < 70:
+    result_data = exec.get_next_page()
+    print("Page:", exec.get_page_number(), ", Data Length:", len(result_data.data))
+
+    if len(result_data.data) == 0:
+        break
+
+    for row in result_data.data:
+        # Extract and print details of each execution
+        print(f"Execution ID: {row.enola_id}")
+        print(f"Start Date: {row.start_dt}")
+        print(f"End Date: {row.end_dt}")
+        print(f"Successful: {row.successfull}")
+        print(f"Agent ID: {row.agent_id}")
+        print(f"Agent Name: {row.agent_name}")
+        print(f"User ID: {row.user_id}")
+        print(f"Session ID: {row.session_id}")
+        print(f"Channel: {row.channel}")
+        print(f"Message Input: {row.message_input}")
+        print(f"Message Output: {row.message_output}")
+        print("-------------------------------------")
+```
+
+---
+		
+#### **Complete Example: Extract Information and Create Systematic Evaluations**
+
+
+```python
+# Import necessary libraries
+from enola import get_executions
+from enola import evaluation
+from enola.enola_types import EvalType
+from dotenv import load_dotenv
+import os
+
+# Load .env file with token inside
+load_dotenv()
+
+# Set up your Enola token
+token = os.getenv("ENOLA_TOKEN")
+
+# Create a GetExecutions instance
+exec = get_executions.GetExecutions(token=token, raise_error_if_fail=False)
+
+# Define your query parameters
+exec.query(
+    date_from="2024-10-28T00:00",
+    date_to="2024-12-31T23:59",
+    limit=20
+)
+
+# Retrieve and process data
+while exec.continue_execution and exec.get_page_number() < 70:
+    result_data = exec.get_next_page()
+    print("Page:", exec.get_page_number(), ", Data Length:", len(result_data.data))
+
+    if len(result_data.data) == 0:
+        break
+
+    for row in result_data.data:
+        # Extract and print details of each execution
+        print(f"Execution ID: {row.enola_id}")
+        print(f"Start Date: {row.start_dt}")
+        print(f"End Date: {row.end_dt}")
+        print(f"Successful: {row.successfull}")
+        print(f"Agent ID: {row.agent_id}")
+        print(f"Agent Name: {row.agent_name}")
+        print(f"User ID: {row.user_id}")
+        print(f"Session ID: {row.session_id}")
+        print(f"Channel: {row.channel}")
+        print(f"Message Input: {row.message_input}")
+        print(f"Message Output: {row.message_output}")
+        print("-------------------------------------")
+
+        # Create an Evaluation Instance
+        eval = evaluation.Evaluation(
+            token=token,
+            eval_type=EvalType.AUTO,
+            user_id="auto_123",
+            user_name="auto",
+        )
+
+        # Add an Evaluation
+        eval.add_evaluation(
+            enola_id=row.enola_id,
+            eval_id="003",
+            value=len(row.message_output),
+            comment=""
+        )
+
+        result = eval.execute()
+```
 
 ---
 

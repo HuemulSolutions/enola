@@ -2,7 +2,7 @@
 
 Enola-AI provides a feedback system that allows users to evaluate AI agent executions. Feedback can be submitted either through the Enola-AI platform or programmatically via code. This helps in assessing the performance of your AI agents and gathering user and system insights for improvement.
 
-Feedback evaluation is a powerful feature, due to the importance of evaluating a system through feedback, this allows to get a better insight about the quality of the interactions that the users are having with the system and their level of satisfaction. By detecting the weak or problematic areas, you will be able to take better decisions to improve your AI solutions.
+Feedback evaluation is a powerful feature, due to the importance of evaluating a system through feedback, this allows to get a better insight about the quality of the interactions that the users are experiencing with the system and their level of satisfaction. By detecting the weak or problematic areas, you will be able to take better decisions to improve your AI solutions.
 
 As shown in the image, Enola-AI provides a Feedback Evaluation feature, enabling you to send evaluation feedback to the Enola-AI servers for further analysis and processing, adding value to the AI system.
 
@@ -67,9 +67,9 @@ You have to evaluate the "Format of the Response".
 Code example:
 ```python
 eval.add_evaluation(
-    enola_id="g57y84hkc412m", # Provide the execution ID (`enola_id`)
-    eval_id="02", 			  # Provide the ID from a category
-    value=95,  				  # Add a score value between a custom range
+    enola_id="gr57y84hkc412m...",  # Provide the execution ID (`enola_id`)
+    eval_id="02", 			       # Provide the ID from a category
+    value=95,  				       # Add a score value between a custom range
     comment="The response was informative and well-structured."
 )
 ```
@@ -91,9 +91,9 @@ You can also provide an evaluation by level instead of a value. The evaluation b
 
 ```python
 eval.add_evaluation_by_level(
-    enola_id="g57y84hkc412m", # Provide the execution ID (`enola_id`)
-    eval_id="02",			  # Provide the ID from a category
-    level=5,				  # Add a score level between 1 and 5
+    enola_id="gr57y84hkc412m...", # Provide the execution ID (`enola_id`)
+    eval_id="02",			      # Provide the ID from a category
+    level=5,				      # Add a score level between 1 and 5
     comment="Good response, helpful and concise."
 )
 ```
@@ -129,17 +129,17 @@ eval = evaluation.Evaluation(
 
 # Add an Evaluation
 eval.add_evaluation(
-    enola_id="g57y84hkc412m", # Provide the execution ID (`enola_id`)
-    eval_id="02", 			  # Provide the ID from a category
-    value=95,  				  # Add a score value between a custom range
+    enola_id="gr57y84hkc412m...", # Provide the execution ID (`enola_id`)
+    eval_id="02", 			      # Provide the ID from a category
+    value=95,  				      # Add a score value between a custom range
     comment="The response was informative and well-structured."
 )
 
 # Add an Evaluation by Level
 eval.add_evaluation_by_level(
-    enola_id="k90h55mqc342s", # Provide the execution ID (`enola_id`)
-    eval_id="02",			  # Provide the ID from a category
-    level=5,				  # Add a score level between 1 and 5
+    enola_id="gr57y84hkc412m...", # Provide the execution ID (`enola_id`)
+    eval_id="02",			      # Provide the ID from a category
+    level=5,				      # Add a score level between 1 and 5
     comment="Good response, helpful and concise."
 )
 

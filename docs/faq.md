@@ -12,7 +12,6 @@
    - 1.7. [If I start the method tracking(), but the method execute() fails to execute, what happens with the data?](#17-if-i-start-the-method-tracking-but-the-method-execute-fails-to-execute-what-happens-with-the-data)
    - 1.8. [How does the graphic interface work in Enola-AI?](#18-how-does-the-graphic-interface-work-in-enola-ai)
    - 1.9. [How to link a model or chatbot with Enola-AI?](#19-how-to-link-a-model-or-chatbot-with-enola-ai)
-   - 1.10. [Does Enola-AI support integrations with other platforms or tools?](#110-does-enola-ai-support-integrations-with-other-platforms-or-tools)
 
 ## 1. **Frequently Asked Questions**
 
@@ -278,17 +277,6 @@ def ollama_chat(prompt, model="llama3.2"): # define the user question (prompt) a
 This will allow you to store the response from your model into the variable `response`. You can use the response and integrate it with the Enola-AI workflow, by tracking the user input and the model output. You can follow the documentation [5. Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) to learn how you can integrate your AI model and start the tracking with Enola-AI.
 
 For a comprehensive guide and example, please refer to our documentation on [Building a Chatbot using Ollama](building_chatbot_ollama.md), which walks you through the process of integrating a chatbot with Enola-AI step by step.
-
----
-
-### 1.10. **Does Enola-AI support integrations with other platforms or tools?**
-
-**Answer:**
-
-Yes, Enola-AI is designed to be flexible and extensible:
-
-- **API Access:** Use Enola-AI's SDK library to integrate with other tools or platforms.
-- **Custom Integrations:** You can build your own custom integrations based on your application's requirements.
 
 ---
 

@@ -79,60 +79,70 @@ By doing a pip install, you have the Enola-AI Python library and its dependencie
 
 To start using the Enola-AI Python library, follow the steps below to initialize tracking in your application.
 
-### 5.1. Initializing Tracking
-To connect to Enola and initialize tracking you will need:
-- A token provided by Enola-AI. This token is essential for authentication and authorization purposes
-- A Python script. You can start by creating an empty Python file with a .py extension (e.g. enola_sample.py, enola_script.py)
+### 5.1 Initializing Tracking
 
-#### **5.1.1. Loading Enola API Token**
-**You can load the token from a `.env` file (recommended):**
+To connect to Enola and initialize tracking, you will need:
+
+- A token provided by Enola-AI. This token is essential for authentication and authorization purposes.
+- A Python script. You can start by creating an empty Python file with a `.py` extension (e.g., `enola_sample.py`, `enola_script.py`).
+
+#### Steps:
+
+**Step 1: Load the Enola API Token**
+
+*You can load the token from a `.env` file (recommended):*
 
 This method is recommended due to better security for token management.
-- Go to the same directory where your Python file is located
-- To load the token, create a file named `.env` in the same directory as your Python script
 
-- Then open the file with a text editor and add this line:
+- Go to the same directory where your Python file is located.
+- Create a file named `.env` in the same directory as your Python script.
+- Open the file with a text editor and add this line:
 
-    ```plaintext
-    ENOLA_TOKEN=your_api_token
-    ```
-- Replace `your_api_token` with your Enola API token
-- Assuming the Python file and the `.env` file are in the same directory, your token should be loaded.
+  ```plaintext
+  ENOLA_TOKEN=your_api_token
+  ```
+
+- Replace `your_api_token` with your Enola API token.
+- Ensure that your Python file and the `.env` file are in the same directory so that the token can be loaded.
 
 ---
 
-**Alternatively, you can set it directly in your script:**
+*Alternatively, you can set it directly in your script:*
 
 This method is easier and fine for testing purposes, but it is not recommended because the token is exposed in the script.
-To set it directly in your Python script:
+
 ```python
 token = 'your_api_token'
 ```
 
-**You can also load the token using Environment Variables:**
+---
 
-Another method to load the token is by setting your Enola API token as an Environment Variable. This method (recommended for advanced users) offers more flexibility but requires more complex configurations, depending on your operating system.
-For convenience, the method for loading the token from a `.env` file will be covered instead in this guide.
+*You can also load the token using Environment Variables:*
+
+Another method is by setting your Enola API token as an environment variable. This method (recommended for advanced users) offers more flexibility but requires more complex configurations, depending on your operating system.
 
 ---
 
-#### **5.1.2. Import the Necessary Libraries**
-Assuming you are loading the token from the `.env` file, in your Python script, start importing the necessary libraries:
+**Step 2: Import the Necessary Libraries**
+
+Assuming you are loading the token from the `.env` file, in your Python script, start by importing the necessary libraries:
+
 ```python
 # Import necessary libraries
 from enola.tracking import Tracking     # Enola Tracking module
 from dotenv import load_dotenv          # .env Loader
-import os                               # Import the os module for environment variable access
+import os                               # For environment variable access
 ```
 
-#### **5.1.3. Define User Input**
+**Step 3: Define User Input**
+
 ```python
 # Define the user input message
 user_input = "Hello, what can you do?"  # Input message from the user
 ```
 
-#### **5.1.4. Load the Enola API token**
-Load the Enola API token
+**Step 4: Load the Enola API Token**
+
 ```python
 # Load .env file
 load_dotenv()
@@ -140,7 +150,7 @@ load_dotenv()
 token = os.getenv('ENOLA_TOKEN')
 ```
 
-#### **5.1.5. Initialize the Tracking Agent**
+**Step 5: Initialize the Tracking Agent**
 
 ```python
 # Initialize the tracking agent
@@ -157,14 +167,14 @@ monitor = Tracking(
 )
 ```
 
-#### **5.1.6. Create a New Step**
+**Step 6: Create a New Step**
 
 ```python
 # Create a step
 step_chat = monitor.new_step("User LLM Question")
 ```
 
-#### **5.1.7. Add Extra Information**
+**Step 7: Add Extra Information**
 
 Add any additional information relevant to the step, such as the user's question.
 
@@ -173,27 +183,27 @@ Add any additional information relevant to the step, such as the user's question
 step_chat.add_extra_info("UserQuestion", user_input)
 ```
 
-#### **5.1.8. Process the User Input with the Language Model**
+**Step 8: Process the User Input with the Language Model**
 
 Simulate the model generating a response to the user's question.
 
 ```python
 # Simulated model response
-model_response = "I'm here to assist you in finding the help or information you need"
+model_response = "I'm here to assist you in finding the help or information you need."
 ```
 
-**Note**: You can replace the simulated response with an actual model response (e.g. GPT-4, Ollama, BERT).
-You can check our user guide to build a chatbot using Ollama, by visiting our section [Building an Ollama Chatbot](docs/building_chatbot_ollama.md).
+*Note*: You can replace the simulated response with an actual model response (e.g., GPT-4, Ollama, BERT). You can check our user guide to build a chatbot using Ollama by visiting our section [Building an Ollama Chatbot](docs/building_chatbot_ollama.md).
 
-#### **5.1.9. Add the Model's Response to the Step**
+**Step 9: Add the Model's Response to the Step**
+
 ```python
 # Add model's response
 step_chat.add_extra_info("ModelResponse", model_response)
 ```
 
-#### **5.1.10. Close the LLM Step**
+**Step 10: Close the LLM Step**
 
-Indicate that the step has completed successfully, and include token usage and costs.
+Indicate that the step has completed successfully and include token usage and costs.
 
 ```python
 # Close the LLM Step with close_step_token
@@ -208,7 +218,8 @@ monitor.close_step_token(
     token_output_cost=0.0015  # Cost for output tokens
 )
 ```
-#### 5.1.11. **Execute the Tracking**
+
+**Step 11: Execute the Tracking**
 
 Send the tracking data to the Enola-AI server.
 
@@ -220,9 +231,12 @@ monitor.execute(
     num_iteratons=1
 )
 ```
+
 ---
 
-### 5.2. Complete Example: Basic Tracking Initialization
+### 5.2 Complete Example: Basic Tracking Initialization
+
+Here's the complete code incorporating all the steps:
 
 ```python
 # Import necessary libraries
@@ -257,7 +271,10 @@ step_chat = monitor.new_step("User LLM Question")
 step_chat.add_extra_info("UserQuestion", user_input)
 
 # Simulated model response
-model_response = "I'm here to assist you in finding the help or information you need"
+model_response = "I'm here to assist you in finding the help or information you need."
+
+# Add model's response
+step_chat.add_extra_info("ModelResponse", model_response)
 
 # Close the LLM Step
 monitor.close_step_token(
@@ -278,14 +295,17 @@ monitor.execute(
     num_iteratons=1
 )
 ```
+
 After initializing the tracking agent and executing it, you should get a console output like this:
+
 ```plaintext
 2024-10-30 09:43:29,909 WELCOME to Enola...
-2024-10-30 09:43:29,909 authorized...  
-2024-10-30 09:43:29,909 STARTED!!!     
-My Enola Project: sending to server... 
-My Enola Project: finish OK! 
+2024-10-30 09:43:29,909 authorized...
+2024-10-30 09:43:29,909 STARTED!!!
+My Enola Project: sending to server...
+My Enola Project: finish OK!
 ```
+
 **This means you have successfully connected to Enola-AI and sent the data to the servers.**
 
 ---

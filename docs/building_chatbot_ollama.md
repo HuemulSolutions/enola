@@ -24,7 +24,7 @@ Basic architecture with Enola-AI and Tracking feature:
 
 ![Track Activity](images/track_activity.jpg)
 
-By the end of this guide, you will have a fully functional chatbot that tracks and logs data to the Enola-AI platform.
+By the end of this guide, you will have a fully functional chatbot that tracks and logs data to the Enola-AI platform, offering valuable insight to your AI system.
 
 ---
 
@@ -38,13 +38,13 @@ By the end of this guide, you will have a fully functional chatbot that tracks a
 
 ## **Step 1: Set Up the Environment**
 
-#### **1.1 Install Ollama**
+#### **1.1. Install Ollama**
 
 - Follow the [Ollama Installation Guide](https://github.com/ollama/ollama) to install and set up Ollama.
 - Ensure that Ollama is running and accessible via the API endpoint `http://localhost:11434/`.
 - Ollama 3.2 is being used in this guide. If you use a different version, make sure to replace the `model` version appropriately.
 
-#### **1.2 Install Required Python Packages**
+#### **1.2. Install Required Python Packages**
 
 Open your terminal and run:
 
@@ -54,7 +54,7 @@ pip install langchain enola dotenv uuid langchain_ollama
 
 This will install Enola-AI library, other necessary libraries and LangChain (a framework that helps facilitate the integration of large language models into applications).
 
-#### **1.3 Set Up the Enola-AI API Token**
+#### **1.3. Set Up the Enola-AI API Token**
 
 1. Create a `.env` file in your project directory.
 2. Add your Enola-AI API token:
@@ -69,7 +69,7 @@ This will install Enola-AI library, other necessary libraries and LangChain (a f
 
 ## **Step 2: Create the Chatbot Script**
 
-#### **2.1 Create a Python Script**
+#### **2.1. Create a Python Script**
 
 - Create a file named `ollama_chatbot.py`.
 - Copy and paste the provided code into this file.
@@ -345,7 +345,7 @@ if __name__ == "__main__":
 
 Let's break down the code to understand how it works and how it meets the required functionalities.
 
-#### **3.1 Imports and Setup**
+#### **3.1. Imports and Setup**
 
 - **Imports**: The script imports necessary modules, including `os`, `uuid`, and modules from `enola` and `langchain_ollama`.
 - **Load Environment Variables**: The `dotenv` module loads the `.env` file containing your Enola-AI API token.
@@ -353,7 +353,7 @@ Let's break down the code to understand how it works and how it meets the requir
 - **Session ID**: Generates a unique `session_id` for the chat session.
 - **Interaction Counter**: Initializes `interaction_count` to track the number of interactions.
 
-#### **3.2 Defining the Ollama Chat Function**
+#### **3.2. Defining the Ollama Chat Function**
 
 ```python
 # Define the function for invoking the answer from the model
@@ -378,7 +378,7 @@ response = ollama_chat(user_input)
 print("Response:", response)
 ```
 
-#### **3.3 The Chatbot Function**
+#### **3.3. The Chatbot Function**
 
 ```python
 # Define the chatbot functions
@@ -397,13 +397,13 @@ def chatbot():
 - **Per-Interaction Tracking**: For each user interaction, a new `Tracking` object is created. This ensures that each question and answer pair is tracked as a separate interaction in Enola-AI.
 - **Session Consistency**: The `session_id` remains the same across all interactions, linking them under the same session.
 
-#### **3.4 Handling User Input**
+#### **3.4. Handling User Input**
 
 - **User Prompt**: The chatbot prompts the user for input and checks if the user wants to exit.
 - **Interaction Counter**: Increments `interaction_count` for each new interaction.
 - **Initialize `num_iteratons`**: Resets `num_iteratons` to 0 at the start of each interaction.
 
-#### **3.5 Creating Interaction Steps**
+#### **3.5. Creating Interaction Steps**
 
 ```python
 # Create a Tracking object for this interaction
@@ -423,7 +423,7 @@ monitor = Tracking(
 - **New Tracking Object**: A new `monitor` instance is created for each interaction.
 - **Message Input**: The user's question is set as the `message_input` of the `Tracking` object.
 
-#### **3.6 Validating User Input**
+#### **3.6. Validating User Input**
 
 ```python
 # Step 1: Validate User Input
@@ -441,7 +441,7 @@ else:
 - **Validation Step**: A new step is created to validate the user input.
 - **Error Handling**: If the input is empty, an error is logged, and the interaction is terminated.
 
-#### **3.7 Processing User Commands**
+#### **3.7. Processing User Commands**
 
 - **File Upload Handling**:
 
@@ -478,7 +478,7 @@ else:
   What is binary code?
   ```
 
-#### **3.8 Validating Model Response**
+#### **3.8. Validating Model Response**
 
 ```python
 # Step 3: Validate Model Response
@@ -495,12 +495,12 @@ else:
 - **Validation Step**: A step to validate the LLM's response.
 - **Error Handling**: If the response is empty, an error is logged, and the interaction is terminated.
 
-#### **3.9 Logging Additional Information**
+#### **3.9. Logging Additional Information**
 
 - **Model Response**: The LLM's response is added to the step's extra info.
 - **Token Counts and Costs**: Simulated token usage and costs are calculated and included when closing the step.
 
-#### **3.10 Closing Steps and Finalizing Tracking**
+#### **3.10. Closing Steps and Finalizing Tracking**
 
 - **Closing Steps**: Each step is properly closed using `monitor.close_step_token()` or `monitor.close_step_others()`.
 - **Monitor Execution**: After processing the interaction, `monitor.execute()` is called to send the collected data to Enola-AI.
@@ -509,12 +509,12 @@ else:
 
 ## **Step 4: Running the Chatbot**
 
-#### **4.1 Replace Placeholder Values**
+#### **4.1. Replace Placeholder Values**
 
 - **Enola-AI Token**: Ensure your `.env` file contains your actual Enola-AI API token.
 - **Ollama Model**: Ensure the model name (`"llama3.2"`) matches the model installed on your Ollama instance.
 
-#### **4.2 Start the Chatbot**
+#### **4.2. Start the Chatbot**
 
 - Execute the script or open your terminal and navigate to the directory containing `ollama_chatbot.py`.
 - Run the chatbot:
@@ -529,7 +529,7 @@ else:
 
 ## **Step 5: Using the Chatbot**
 
-#### **5.1 Regular Conversation**
+#### **5.1. Regular Conversation**
 
 - Type in your messages and receive responses from the chatbot.
 - Example:
@@ -539,7 +539,7 @@ else:
   Chatbot: [Response from Ollama LLM]
   ```
 
-#### **5.2 Uploading a File**
+#### **5.2. Uploading a File**
 
 - **Option 1**: Provide the file path directly in the command.
 
@@ -556,7 +556,7 @@ else:
   Chatbot: File 'file.txt' uploaded successfully.
   ```
 
-#### **5.3 Ending the Chat Session**
+#### **5.3. Ending the Chat Session**
 
 - Type `exit` to end the conversation.
 
@@ -564,7 +564,7 @@ else:
 
 ## **Step 6: Understanding How the Chatbot Meets the Requirements**
 
-### **6.1 Sending Online Chat Data**
+### **6.1. Sending Online Chat Data**
 
 - **Implementation**: Each user input and the corresponding LLM response are captured and sent to Enola-AI as separate interactions.
 - **Code Snippet**:
@@ -581,7 +581,7 @@ else:
   step_chat.add_extra_info("ModelResponse", response)
   ```
 
-### **6.2 Sending Multiple Tasks**
+### **6.2. Sending Multiple Tasks**
 
 - **Implementation**: The chatbot validates user input and model responses in separate steps within each interaction.
 - **Code Snippet**:
@@ -603,7 +603,7 @@ else:
   # ...
   ```
 
-### **6.3 Sending File Information**
+### **6.3. Sending File Information**
 
 - **Implementation**: When the user uploads a file, file details are logged in the interaction.
 - **Code Snippet**:
@@ -619,7 +619,7 @@ else:
   )
   ```
 
-### **6.4 Sending API Information**
+### **6.4. Sending API Information**
 
 - **Implementation**: API call details to the local Ollama LLM are recorded within each interaction.
 - **Code Snippet**:
@@ -648,7 +648,7 @@ else:
   )
   ```
 
-### **6.5 Sending Cost Information**
+### **6.5. Sending Cost Information**
 
 - **Implementation**: Token usage and estimated costs are calculated and included when closing the step in each interaction.
 - **Code Snippet**:
@@ -682,19 +682,19 @@ else:
 
 ## **Step 7: Monitoring with Enola-AI**
 
-#### **7.1 Accessing the Enola-AI Dashboard**
+#### **7.1. Accessing the Enola-AI Dashboard**
 
 - Log into your Enola-AI account.
 - Navigate to the Agent Executions section.
 
-#### **7.2 Reviewing the Interactions**
+#### **7.2. Reviewing the Interactions**
 
 - Each interaction (question and answer pair) is tracked separately.
 - Locate the tracking data for your interactions.
 - **Interaction Details**: You should see individual entries representing each interaction.
 - **Steps**: Within each interaction, steps such as "Validate User Input", "User Interaction", and "Validate Model Response" are recorded.
 
-#### **7.3 Analyzing the Data**
+#### **7.3. Analyzing the Data**
 
 - **User Input**: The user input is available in the `message_input` field of the `Tracking` object and under "UserInput" in extra info.
 - **Model Response**: The assistant's response is available in the `message_output` and under "ModelResponse" in extra info.
