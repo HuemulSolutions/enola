@@ -87,14 +87,14 @@ This code demonstrates how to extract execution data from the Enola-AI platform:
 ## How to Extract Information and Create Systematic Evaluations
 
 When combining the extracting information and evaluations features, you can create systematic evaluations when extracting information.
-By following the steps from the Evaluation Feedback section, you can create an evaluation category.
-In this case, you can create an evaluation category that will rate a submission based on the length of its text. For this purpose, you can messure the length of the text with a number, this number will be considered as the `value`, and this `value` will be inside a range of different values.
+By following the steps from the previous section [6.3. Evaluation Feedback](feedback_evaluation.md), you can choose an evaluation.
+In this case, you can use an evaluation that will rate a submission based on the "Length of the Response". For this purpose, you can messure the length of the text with a number, this number will be considered as the `value`, and this `value` will be inside a range of different values.
 Let's say the higher the `value`, the better:
-- 0-100: Very Bad
-- 101-200: Bad
-- 201-300: Intermediate
-- 301-400: Good
-- 500-5000: Very Good
+- 0-5: Very Bad
+- 6-20: Bad
+- 21-60: Intermediate
+- 61-150: Good
+- 151-10000: Very Good
 
 This means if you want to send a text with 1000 words, it will be automatically rated as Very Good.
 
@@ -120,7 +120,7 @@ from enola.enola_types import EvalType
         # Add an Evaluation
         eval.add_evaluation(
             enola_id=row.enola_id,
-            eval_id="003",
+            eval_id="003", # ID from evaluation "Length of the Response"
             value=len(row.message_output),
             comment=""
         )
@@ -190,7 +190,7 @@ while exec.continue_execution and exec.get_page_number() < 70:
         # Add an Evaluation
         eval.add_evaluation(
             enola_id=row.enola_id,
-            eval_id="003",
+            eval_id="003", # ID from evaluation "Length of the Response"
             value=len(row.message_output),
             comment=""
         )

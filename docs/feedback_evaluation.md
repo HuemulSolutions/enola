@@ -38,10 +38,11 @@ token = os.getenv("ENOLA_TOKEN")
 
 Specify the evaluation type (`USER`, `AUTO`, or `INTERNAL`) and user information.
 Evaluation types:
-- USER: Corresponds to evaluations made by the user after an interaction.
-- AUTO: Corresponds to evaluations that are made automatically by the system.
-- INTERNAL: Corresponds to evaluations made from internal users when monitoring evaluations.
+- `USER`: Corresponds to evaluations made by the user after an interaction.
+- `AUTO`: Corresponds to evaluations that are made automatically by the system.
+- `INTERNAL`: Corresponds to evaluations made from internal users when monitoring evaluations.
  
+Code example:
 ```python
 eval = evaluation.Evaluation(
     token=token,
@@ -51,16 +52,16 @@ eval = evaluation.Evaluation(
 )
 ```
 
-### Step 4: Add an Evaluation
+### Step 4: Rate an Evaluation
 
-Provide the execution ID (`enola_id`), an ID from the evaluation category (`eval_id`) , an evaluation value (`value`) and a `comment`.
-In the Enola-AI platform, you can create different categories for evaluations, each category can have its own ranges of values. For example, you can have an evaluation category "Format of the Response", with its own ID `eval_id`, a value inside a range to determine the quality of an interaction, and a `comment`.
+Provide the execution ID (`enola_id`), the ID from the evaluation you are going to use (`eval_id`), an evaluation value (`value`) to rate the evaluation and a `comment`.
 
 Practical example:
+
 You have to evaluate the "Format of the Response".
 
-- Evaluation Category: "Format of the Response"
-- Evaluation Category ID (`eval_id`): "02"
+- Evaluation Name: "Format of the Response"
+- Evaluation ID (`eval_id`): "02"
 - Evaluation Value (`value`): 95
 - Comment (`comment`): "The response was informative and well-structured."
 
@@ -68,36 +69,64 @@ Code example:
 ```python
 eval.add_evaluation(
     enola_id="gr57y84hkc412m...",  # Provide the execution ID (`enola_id`)
-    eval_id="02", 			       # Provide the ID from a category
-    value=95,  				       # Add a score value between a custom range
+    eval_id="02", 			       # Provide the ID from the evaluation
+    value=95,  				       # Add a score value between its custom range
     comment="The response was informative and well-structured."
 )
 ```
+Parameters explanation:
 
+**enola_id:**
+
+The `enola_id` corresponds to the ID of your Enola interaction, you can get it from the Enola-AI platform after checking the details of the interaction, it will appear at the end, under the TAGS section as `Id`.
+Alternatively, you can also extract it via code if it meets your custom criteria by following the steps from the next section [6.4. Extracting Information](extracting_information.md).
+
+**eval_id:**
+
+The `eval_id` corresponds to the ID of the evaluation.
+You can use the following Evaluations ID (`eval_id`) that already exists in Enola-AI:
+- `0`: General Evaluation
+- `02`: Format of the Response (used in this example)
+- `REF01`: References
+- `003`: Length of the Response
+- `004`: Content
+
+**value:**
+
+The `value` corresponds to the rating you will assign to the evaluation, to measure the satisfaction with the interaction.
+The `value` has to be inside a custom range defined when an evaluation is created.
 In this example, the ranges are configured in the following way (High score is Very Good and Low Score is Very Bad):
-- 0-20: Very Bad
-- 21-40: Bad
-- 41-60: Intermediate
-- 61-80: Good
-- 81-100: Very Good
+- `0-20`: Very Bad
+- `21-40`: Bad
+- `41-60`: Intermediate
+- `61-80`: Good
+- `81-100`: Very Good
 
 This means a `value=95` will be considered as Very Good for the "Format of the Response".
 
-**Note: Inside the Enola-AI Platform, you can create and choose the Category name, the ID for `eval_id`, the different ranges for `value`, and a description.**
+**comment:**
 
-### Step 5: Add an Evaluation by Level
+The `comment` is the note you want to leave for this evaluation, you can write how was the experience or the satisfaction level that you had with the interaction, the feedback you provide here can be useful for further analysis.
 
-You can also provide an evaluation by level instead of a value. The evaluation by `level` has a value between 1 (Very Bad) and 5 (Very Good).
+---
+
+Alternatively, you can define your own evaluation inside the Enola-AI platform. Each evaluation has its own ranges of values. For example, there is already an evaluation named "Format of the Response", with evaluation ID "02", then the ranges are defined in a scale to rate the quality of an interaction, and finally there is a description about the evaluation, in this case: "This evaluation requires: - Maximum 5 lines of text".
+
+---
+
+### Step 5: Rate an Evaluation by Level
+
+You can also provide an evaluation by `level` instead of a `value`. The evaluation by `level` has a value between `1` (Very Bad) and `5` (Very Good).
 
 ```python
 eval.add_evaluation_by_level(
     enola_id="gr57y84hkc412m...", # Provide the execution ID (`enola_id`)
-    eval_id="02",			      # Provide the ID from a category
+    eval_id="02",			      # Provide the ID from the evaluation
     level=5,				      # Add a score level between 1 and 5
     comment="Good response, helpful and concise."
 )
 ```
-This approach offers simplicity for the user, by avoiding the need to ask a user to measure with a scale between 0-100. Instead, you measure with only 5 possible options.
+This approach offers simplicity for the user, by avoiding the need to ask a user to measure with a scale between `0-100`. Instead, you measure with only `5` possible options.
 
 ### Step 6: Execute the Evaluation Submission
 
@@ -130,15 +159,15 @@ eval = evaluation.Evaluation(
 # Add an Evaluation
 eval.add_evaluation(
     enola_id="gr57y84hkc412m...", # Provide the execution ID (`enola_id`)
-    eval_id="02", 			      # Provide the ID from a category
-    value=95,  				      # Add a score value between a custom range
+    eval_id="02", 			      # Provide the ID from the evaluation
+    value=95,  				      # Add a score value between its custom range
     comment="The response was informative and well-structured."
 )
 
 # Add an Evaluation by Level
 eval.add_evaluation_by_level(
     enola_id="gr57y84hkc412m...", # Provide the execution ID (`enola_id`)
-    eval_id="02",			      # Provide the ID from a category
+    eval_id="02",			      # Provide the ID from the evaluation
     level=5,				      # Add a score level between 1 and 5
     comment="Good response, helpful and concise."
 )
@@ -147,7 +176,7 @@ eval.add_evaluation_by_level(
 result = eval.execute()
 ```
 
-By following these steps, you can send feedback for evaluations using Python.
+By following these steps, and choosing between an evaluation by `value` or `level`, you can send feedback for evaluations using Python.
 
 ### Managing Feedback on the Enola-AI Platform
 
