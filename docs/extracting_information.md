@@ -90,13 +90,13 @@ When combining the extracting information and evaluations features, you can crea
 By following the steps from the previous section [6.3. Evaluation Feedback](feedback_evaluation.md), you can choose an evaluation.
 In this case, you can use an evaluation that will rate a submission based on the "Length of the Response". For this purpose, you can messure the length of the text with a number, this number will be considered as the `value`, and this `value` will be inside a range of different values.
 Let's say the higher the `value`, the better:
-- 0-5: Very Bad
-- 6-20: Bad
-- 21-60: Intermediate
-- 61-150: Good
-- 151-10000: Very Good
+- `0-5`: Very Bad
+- `6-20`: Bad
+- `21-60`: Intermediate
+- `61-150`: Good
+- `151-10000`: Very Good
 
-This means if you want to send a text with 1000 words, it will be automatically rated as Very Good.
+This means if you want to send a text with `1000` letters, it will be automatically rated as Very Good.
 
 To achieve this, in your Python script you have to add the evaluation logic inside the `for` loop, to send an evaluation every time you retrieve information.
 - At the beginning of your code, import the evaluation libraries:
