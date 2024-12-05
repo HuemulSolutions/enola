@@ -91,6 +91,8 @@ You can use the following Evaluations ID (`eval_id`) that already exists in Enol
 - `003`: Length of the Response
 - `004`: Content
 
+It is important that you use an `eval_id` that was previously defined, otherwise, the evaluation will not work.
+
 **value:**
 
 The `value` corresponds to the rating you will assign to the evaluation, to measure the satisfaction with the interaction.
@@ -104,15 +106,11 @@ In this example, the ranges are configured in the following way (High score is V
 
 This means a `value=95` will be considered as Very Good for the "Format of the Response".
 
+Please keep in mind that evaluations can have different ranges, it is important that you use a `value` that is inside the defined scale, you can check them by visiting the Enola-AI platform.
+
 **comment:**
 
 The `comment` is the note you want to leave for this evaluation, you can write how was the experience or the satisfaction level that you had with the interaction, the feedback you provide here can be useful for further analysis.
-
----
-
-Alternatively, you can define your own evaluation inside the Enola-AI platform. Each evaluation has its own ranges of values. For example, there is already an evaluation named "Format of the Response", with evaluation ID "02", then the ranges are defined in a scale to rate the quality of an interaction, and finally there is a description about the evaluation, in this case: "This evaluation requires: - Maximum 5 lines of text".
-
----
 
 ### Step 5: Rate an Evaluation by Level
 
