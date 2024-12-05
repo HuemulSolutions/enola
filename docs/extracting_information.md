@@ -86,9 +86,9 @@ This code demonstrates how to extract execution data from the Enola-AI platform:
 
 ## How to Extract Information and Create Systematic Evaluations
 
-When combining the extracting information and evaluations features, you can create systematic evaluations when extracting information.
-By following the steps from the previous section [6.3. Evaluation Feedback](feedback_evaluation.md), you can choose an evaluation.
-In this case, you can use an evaluation that will rate a submission based on the "Length of the Response". For this purpose, you can messure the length of the text with a number, this number will be considered as the `value`, and this `value` will be inside a range of different values.
+By combining the extracting information and evaluation features, you can create systematic evaluations during data extraction.
+By following the steps from the previous section [6.3. Feedback Evaluation](feedback_evaluation.md), you can choose an evaluation.
+In this case, you can use an evaluation that will rate a submission based on the "Length of the Response". For this purpose, you can measure the length of the text with a number, this number will be considered as the `value`, and this `value` will fall within a scale containing different ranges.
 Let's say the higher the `value`, the better:
 - `0-5`: Very Bad
 - `6-20`: Bad
@@ -96,9 +96,9 @@ Let's say the higher the `value`, the better:
 - `61-150`: Good
 - `151-10000`: Very Good
 
-This means if you want to send a text with `1000` letters, it will be automatically rated as Very Good.
+This means if the response contains `1000` characters, it will be automatically rated as Very Good.
 
-To achieve this, in your Python script you have to add the evaluation logic inside the `for` loop, to send an evaluation every time you retrieve information.
+To achieve this, you need to add the evaluation logic inside the `for` loop in your Python script, so that you send an evaluation every time you retrieve information.
 - At the beginning of your code, import the evaluation libraries:
 ```python
 from enola import evaluation

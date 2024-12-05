@@ -2,7 +2,7 @@
 
 Enola-AI provides a feedback system that allows users to evaluate AI agent executions. Feedback can be submitted either through the Enola-AI platform or programmatically via code. This helps in assessing the performance of your AI agents and gathering user and system insights for improvement.
 
-Feedback evaluation is a powerful feature, due to the importance of evaluating a system through feedback, this allows to get a better insight about the quality of the interactions that the users are experiencing with the system and their level of satisfaction. By detecting the weak or problematic areas, you will be able to take better decisions to improve your AI solutions.
+Feedback evaluation is a powerful feature, due to the importance of assessing a system through user feedback. This allows you gain better insights into the quality of the interactions that users are experiencing with the system and their level of satisfaction. By detecting the weak or problematic areas, you will be able to make better decisions to improve your AI solutions.
 
 As shown in the image, Enola-AI provides a Feedback Evaluation feature, enabling you to send evaluation feedback to the Enola-AI servers for further analysis and processing, adding value to the AI system.
 
@@ -84,14 +84,14 @@ Alternatively, you can also extract it via code if it meets your custom criteria
 **eval_id:**
 
 The `eval_id` corresponds to the ID of the evaluation.
-You can use the following Evaluations ID (`eval_id`) that already exists in Enola-AI:
+You can use the following Evaluations ID (`eval_id`) that already exist in Enola-AI:
 - `0`: General Evaluation
 - `02`: Format of the Response (used in this example)
 - `REF01`: References
 - `003`: Length of the Response
 - `004`: Content
 
-It is important that you use an `eval_id` that was previously defined, otherwise, the evaluation will not work.
+It is important that you use an `eval_id` that has been previously defined; otherwise, the evaluation will not work.
 
 **value:**
 
@@ -106,11 +106,11 @@ In this example, the ranges are configured in the following way (High score is V
 
 This means a `value=95` will be considered as Very Good for the "Format of the Response".
 
-Please keep in mind that evaluations can have different ranges, it is important that you use a `value` that is inside the defined scale, you can check them by visiting the Enola-AI platform.
+Please keep in mind that evaluations can have different ranges, it is important that you use a `value` that is inside the defined scale, you can check them in more details by visiting the Enola-AI platform.
 
 **comment:**
 
-The `comment` is the note you want to leave for this evaluation, you can write how was the experience or the satisfaction level that you had with the interaction, the feedback you provide here can be useful for further analysis.
+The `comment` is a note you want to leave for this evaluation. You can describe your experience or the level of satisfaction you had with the interaction. The feedback provided here can be useful for further analysis.
 
 ### Step 5: Rate an Evaluation by Level
 
@@ -124,7 +124,7 @@ eval.add_evaluation_by_level(
     comment="Good response, helpful and concise."
 )
 ```
-This approach offers simplicity for the user, by avoiding the need to ask a user to measure with a scale between `0-100`. Instead, you measure with only `5` possible options.
+This approach offers simplicity for the user, by avoiding the need to ask a user to measure with a wider or custom scale. Instead, you measure with only `5` possible options.
 
 ### Step 6: Execute the Evaluation Submission
 
