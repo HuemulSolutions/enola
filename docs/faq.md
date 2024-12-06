@@ -1,4 +1,4 @@
-## Frequently Asked Questions (FAQ)
+# Frequently Asked Questions (FAQ)
 
 ## Table of Contents
 
@@ -12,11 +12,10 @@
    - 1.7. [If I start the method tracking(), but the method execute() fails to execute, what happens with the data?](#17-if-i-start-the-method-tracking-but-the-method-execute-fails-to-execute-what-happens-with-the-data)
    - 1.8. [How does the graphic interface work in Enola-AI?](#18-how-does-the-graphic-interface-work-in-enola-ai)
    - 1.9. [How to link a model or chatbot with Enola-AI?](#19-how-to-link-a-model-or-chatbot-with-enola-ai)
-   - 1.10. [Does Enola-AI support integrations with other platforms or tools?](#110-does-enola-ai-support-integrations-with-other-platforms-or-tools)
 
 ## 1. **Frequently Asked Questions**
 
-### 1.1 **Question: How secure is my data with Enola-AI?**
+### 1.1 **How secure is my data with Enola-AI?**
 
 **Answer:**
 
@@ -28,7 +27,7 @@ Enola-AI prioritizes data security and privacy:
 
 ---
 
-### 1.2. **Question: How does the token work? How can I obtain the token?**
+### 1.2. **How does the token work? How can I obtain the token?**
 
 **Answer:**
 
@@ -43,7 +42,7 @@ The token in Enola-AI is a secure credential that authenticates your application
 2. **Obtaining the Token:**
 
    - **Sign Up in https://enola-ai.com/**
-   - After signing up, you will receive a token From Enola-AI.
+   - After signing up, you will receive a token from Enola-AI.
 
 
 3. **Security Considerations:**
@@ -56,7 +55,7 @@ By properly obtaining and securing your token, you ensure that your application'
 
 ---
 
-### 1.3. **Question: What types of data can I track with Enola-AI?**
+### 1.3. **What types of data can I track with Enola-AI?**
 
 **Answer:**
 
@@ -71,7 +70,7 @@ Enola-AI allows you to track various types of data, including:
 
 ---
 
-### 1.4. **Question: How to handle the errors with Enola-AI?**
+### 1.4. **How to handle the errors with Enola-AI?**
 
 **Answer:**
 
@@ -127,7 +126,7 @@ By properly handling and logging errors, you maintain a detailed record of any i
 
 ---
 
-### 1.5. **Question: How to use Steps? What is the proper way to open and close them?**
+### 1.5. **How to use Steps? What is the proper way to open and close them?**
 
 **Answer:**
 
@@ -201,50 +200,63 @@ By properly opening and closing steps, you enable Enola-AI to accurately track t
 
 ---
 
-### 1.6. **Question: When Sending File Information, can I check the content inside the file?**
+### 1.6. **When Sending File Information, can I check the content inside the file?**
 
 **Answer:**
 
-The content inside the file cannot be checked in Enola-AI, this is due to security and privacy reasons. When uploading files, Enola-AI logs the information of the file, but not its content. This means the files you are uploading must be in its own repository.
+The content inside the file cannot be checked in Enola-AI; this is due to security and privacy reasons. When uploading files, Enola-AI logs the information of the file, but not its content. This means the files you are uploading must be stored in your own repository.
 
 ---
 
-### 1.7. **Question: If I start the method tracking(), but the method execute() fails to execute, what happens with the data?**
+### 1.7. **If I start the method `tracking()`, but the method `execute()` fails to execute, what happens with the data?**
 
 **Answer:**
 
-If the Tracking started but the method execute() fails, it means the data won't be send to the Enola-AI servers. It is important that you execute this function if you want your data to be processed by Enola-AI. It is strongly recommended to handle exceptions in every section of your code, to avoid losing your data and keeping track of the potential errors that may appear during the execution of the different stages in a system.
+If the `tracking()` started but the method `execute()` fails, it means the data won't be sent to the Enola-AI servers. It is important that you execute this function if you want your data to be processed by Enola-AI. It is strongly recommended to handle exceptions in your code, to avoid losing your data and keeping track of the potential errors that may appear during the execution of the different stages in a system.
 
 ---
 
-### 1.8. **Question: How does the graphic interface work in Enola-AI?**
+### 1.8. **How does the graphic interface work in Enola-AI?**
 
 **Answer:**
 
-You can visit https://enola-ai.com/ and Login with your Enola credentials. Inside the Enola-AI platform, you can check and review all your trackings sessions in section "Agent Executions". There it is possible to track any step or interaction that has been logged. Allowing you to monitor and evaluate your models.
+You can visit https://enola-ai.com/ and log in with your Enola credentials. Inside the Enola-AI platform, you can check and review all your tracking sessions in section "Agent Executions". There, it is possible to track any step or interaction that has been logged, allowing you to monitor and evaluate your models.
 
 
 ---
 
-### 1.9. **Question: How to link a model or chatbot with Enola-AI?**
+### 1.9. **How to link a model or chatbot with Enola-AI?**
 
 **Answer:**
 
 Linking your model or chatbot with Enola-AI involves integrating the Enola-AI tracking into your application's codebase. Here's how you can do it:
 
-You have to import the class or the method of your model/chatbot into your code.
+You have to import the function from the class of your model/chatbot into your code.
 For this purpose, it is recommended to use Langchain (a framework that helps facilitate the integration of large language models into applications).
 
-Example:
+Simple example of a chatbot/model class:
+```python
+# ollama_chatbot.py
+
+# Import langchain to handle Ollama through code
+from langchain_ollama import OllamaLLM
+
+# Define the ollama_chat function
+def ollama_chat(prompt, model="llama3.2"): # define the user question (prompt) and Ollama model version
+    llm = OllamaLLM(model=model)
+    response = llm.invoke(prompt)
+    return response                        # return a model response after sending a user question
+```
+
 
 1. **Import the Langchain library for Ollama**
     ```python
-    # Import Langchain for Ollama
+    # Import Ollama from Langchain
     from langchain_ollama import OllamaLLM
     ```
-2. **Call your model in your script**
+2. **Define the chatbot function in your script**
     ```python
-    # Import the method of your model
+    # Define the function of your model
     def ollama_chat(prompt, model="llama3.2"):
         llm = OllamaLLM(model=model)
         response = llm.invoke(prompt)
@@ -254,24 +266,17 @@ Example:
 3. **Call the model inside your code and store the response in a variable:**
 
     ```python
+	# Define user_input to store the user question
+	user_input = "What is Morse code?"
+	
     # Invoke the LLM to get the response
     response = ollama_chat(user_input)
+	print(response)
     ```
 
-This will allow you to easily store the response from your model into the variable `response`.
+This will allow you to store the response from your model into the variable `response`. You can use the response and integrate it with the Enola-AI workflow, by tracking the user input and the model output. You can follow the documentation [5. Getting Started](https://github.com/HuemulSolutions/Enola-AI#5-getting-started) to learn how you can integrate your AI model and start the tracking with Enola-AI.
 
-For a comprehensive guide and example, please refer to our documentation on [Building a Chatbot using Ollama](docs/building_chatbot_ollama.md), which walks you through the process of integrating a chatbot with Enola-AI step by step.
-
----
-
-### 1.10. **Question: Does Enola-AI support integrations with other platforms or tools?**
-
-**Answer:**
-
-Enola-AI is designed to be flexible and extensible:
-
-- **API Access:** Use Enola-AI's API to integrate with other tools or platforms.
-- **Custom Integrations:** You can build your own custom integrations based on your application's requirements.
+For a comprehensive guide and example, please refer to our documentation on [Building a Chatbot using Ollama](building_chatbot_ollama.md), which walks you through the process of integrating a chatbot with Enola-AI step by step.
 
 ---
 
