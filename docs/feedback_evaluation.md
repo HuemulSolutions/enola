@@ -78,8 +78,26 @@ Parameters explanation:
 
 **enola_id:**
 
-The `enola_id` corresponds to the ID of your Enola interaction, you can get it from the Enola-AI platform after checking the details of the interaction, it will appear at the end, under the TAGS section as `Id`.
-Alternatively, you can also extract it via code if it meets your custom criteria by following the steps from the next section [6.4. Extracting Information](extracting_information.md).
+The `enola_id` corresponds to the ID of your Enola interaction.
+There are different ways to obtain the `enola_id`:
+1. You can get it from an instance of the Tracking() method if you created one previously in your script, by using the parameter enola_id:
+	```python
+	# ... import necessary modules and load token
+
+	# Initialize a tracking agent
+	monitor = Tracking(
+		token=token,
+		name="My Enola Project",
+		is_test=True,
+		message_input=user_input # Hello, What can you do?
+	)
+
+	# Print the enola_id
+	print(monitor.enola_id)
+	```
+
+2. You can also get it manually from the Enola-AI platform after checking the details of an interaction, it will appear at the end, under the TAGS section as `Id`.
+3. You can extract it via code if it meets your custom criteria by following the steps from the next section [6.4. Extracting Information](extracting_information.md).
 
 **eval_id:**
 
@@ -106,7 +124,7 @@ In this example, the ranges are configured in the following way (High score is V
 
 This means a `value=95` will be considered as Very Good for the "Format of the Response".
 
-Please keep in mind that evaluations can have different ranges, it is important that you use a `value` that is inside the defined scale, you can check them in more details by visiting the Enola-AI platform.
+Please keep in mind that evaluations can have different ranges, it is important that you use a `value` that is inside the defined scale of the evaluation, you can check them in more details by visiting the Enola-AI platform.
 
 **comment:**
 
